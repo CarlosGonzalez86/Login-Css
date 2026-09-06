@@ -396,232 +396,538 @@
     </div>
 
     <script>
-        /* ========== CONFIG ========== */
-        // Usa la misma origin donde se sirve la página, o localhost:3000 como fallback
-        const API_BASE = window.location.origin || 'http://localhost:3000';
+/* ========== CONFIG ========== */
+const API_BASE =
+    window.location.hostname === 'localhost'
+        ? 'http://localhost:3000'
+        : window.location.origin;
 
-        /* ========== PARTÍCULAS ANIMADAS ========== */
-        const particlesContainer = document.querySelector('.particles');
-        for (let i = 0; i < 50; i++) {
-            const p = document.createElement('div');
-            p.classList.add('particle');
-            p.style.left = Math.random() * 100 + 'vw';
-            p.style.animationDuration = (6 + Math.random() * 6) + 's';
-            p.style.opacity = Math.random();
-            particlesContainer.appendChild(p);
+/* ========== PARTÍCULAS ANIMADAS ========== */
+const particlesContainer = document.querySelector('.particles');
+
+if (particlesContainer) {
+    for (let i = 0; i < 50; i++) {
+        const p = document.createElement('div');
+        p.classList.add('particle');
+        p.style.left = Math.random() * 100 + 'vw';
+        p.style.animationDuration = (6 + Math.random() * 6) + 's';
+        p.style.opacity = Math.random();
+
+        particlesContainer.appendChild(p);
+    }
+}
+
+/* ========== MODO OSCURO AUTOMÁTICO ========== */
+const hour = new Date().getHours();
+
+if (hour >= 18 || hour <= 6) {
+    document.body.classList.add('dark-mode');
+}
+
+/* ========== HELPERS ========== */
+function showError(element, text) {
+    element.textContent = text;
+    element.style.display = 'block';
+}
+
+function showSuccess(text) {
+    const success = document.getElementById('registerSuccess');
+
+    if (success) {
+        success.textContent = text;
+        success.style.display = 'block';
+    }
+}
+
+function clearMessages() {
+    [
+        'loginError',
+        'registerError',
+        'registerSuccess'
+    ].forEach(id => {
+        const el = document.getElementById(id);
+
+        if (el) {
+            el.style.display = 'none';
+            el.textContent = '';
+        }
+    });
+}
+
+function shakeBox() {
+    const authBox = document.getElementById('authBox');
+
+    authBox.classList.add('shake');
+
+    setTimeout(() => {
+        authBox.classList.remove('shake');
+    }, 500);
+}
+
+/* ========== TOKEN ========== */
+function saveSession(data) {
+    localStorage.setItem('token', data.token);
+    localStorage.setItem('user', JSON.stringify(data.user));
+    localStorage.setItem('tokenTime', Date.now());
+}
+
+function isTokenExpired() {
+
+    const tokenTime =
+        localStorage.getItem('tokenTime');
+
+    if (!tokenTime) return true;
+
+    const hours = 24;
+
+    return (
+        Date.now() -
+        Number(tokenTime)
+    ) > hours * 60 * 60 * 1000;
+}
+
+/* ========== API REQUEST ========== */
+async function apiRequest(endpoint, payload) {
+
+    const response = await fetch(
+        `${API_BASE}${endpoint}`,
+        {
+            method: 'POST',
+            headers: {
+                'Content-Type':
+                    'application/json'
+            },
+            body: JSON.stringify(payload)
+        }
+    );
+
+    let result;
+
+    try {
+        result = await response.json();
+    } catch {
+        throw new Error(
+            'Respuesta inválida del servidor'
+        );
+    }
+
+    if (!response.ok) {
+        throw new Error(
+            result.error ||
+            'Error del servidor'
+        );
+    }
+
+    return result;
+}
+
+/* ========== REDIRECCIÓN AUTOMÁTICA ========== */
+document.addEventListener(
+    'DOMContentLoaded',
+    () => {
+
+        const token =
+            localStorage.getItem('token');
+
+        if (
+            token &&
+            !isTokenExpired() &&
+            window.location.pathname !==
+            '/dashboard.html'
+        ) {
+            // window.location.href =
+            // '/dashboard.html';
         }
 
-        /* ========== MODO OSCURO AUTOMÁTICO ========== */
-        const hour = new Date().getHours();
-        if (hour >= 18 || hour <= 6) {
-            document.body.classList.add("dark-mode");
-        }
+    }
+);
 
-        /* ========== ALTERNANCIA ENTRE FORMULARIOS ========== */
-        function toggleForms() {
-            const loginForm = document.getElementById('loginForm');
-            const registerForm = document.getElementById('registerForm');
-            const authBox = document.getElementById('authBox');
+/* ========== ALTERNANCIA DE FORMULARIOS ========== */
+function toggleForms() {
 
-            loginForm.classList.toggle('active');
-            registerForm.classList.toggle('active');
-            authBox.classList.remove('shake');
-            
-            // Limpiar mensajes
-            document.getElementById('loginError').style.display = 'none';
-            document.getElementById('registerError').style.display = 'none';
-            document.getElementById('registerSuccess').style.display = 'none';
-        }
+    const loginForm =
+        document.getElementById('loginForm');
 
-        /* ========== INDICADOR DE FORTALEZA DE CONTRASEÑA ========== */
-        document.getElementById('newpass').addEventListener('input', function() {
+    const registerForm =
+        document.getElementById(
+            'registerForm'
+        );
+
+    const authBox =
+        document.getElementById('authBox');
+
+    loginForm.classList.toggle('active');
+    registerForm.classList.toggle('active');
+
+    authBox.classList.remove('shake');
+
+    clearMessages();
+}
+
+/* ========== FORTALEZA DE CONTRASEÑA ========== */
+const passwordInput =
+    document.getElementById('newpass');
+
+if (passwordInput) {
+
+    passwordInput.addEventListener(
+        'input',
+        function () {
+
             const password = this.value;
-            const strengthBar = document.getElementById('strengthBar');
-            const strengthText = document.getElementById('strengthText');
+
+            const strengthBar =
+                document.getElementById(
+                    'strengthBar'
+                );
+
+            const strengthText =
+                document.getElementById(
+                    'strengthText'
+                );
 
             if (password.length < 8) {
-                strengthBar.className = 'password-strength weak';
-                strengthText.textContent = 'Mínimo 8 caracteres';
-            } else if (password.match(/^[a-zA-Z0-9]+$/) && password.length < 12) {
-                strengthBar.className = 'password-strength weak';
-                strengthText.textContent = '❌ Débil';
-            } else if (password.match(/[a-z]/) && password.match(/[A-Z]/) && password.match(/[0-9]/)) {
-                if (password.length < 12) {
-                    strengthBar.className = 'password-strength medium';
-                    strengthText.textContent = '⚠️ Media';
-                } else {
-                    strengthBar.className = 'password-strength strong';
-                    strengthText.textContent = '✅ Fuerte';
-                }
+
+                strengthBar.className =
+                    'password-strength weak';
+
+                strengthText.textContent =
+                    'Mínimo 8 caracteres';
+
+                return;
+            }
+
+            const hasLower =
+                /[a-z]/.test(password);
+
+            const hasUpper =
+                /[A-Z]/.test(password);
+
+            const hasNumber =
+                /\d/.test(password);
+
+            const hasSpecial =
+                /[!@#$%^&*(),.?":{}|<>]/.test(password);
+
+            const score =
+                [hasLower, hasUpper,
+                 hasNumber, hasSpecial]
+                .filter(Boolean).length;
+
+            if (score <= 2) {
+
+                strengthBar.className =
+                    'password-strength weak';
+
+                strengthText.textContent =
+                    '❌ Débil';
+
+            } else if (score === 3) {
+
+                strengthBar.className =
+                    'password-strength medium';
+
+                strengthText.textContent =
+                    '⚠️ Media';
+
             } else {
-                strengthBar.className = 'password-strength weak';
-                strengthText.textContent = '❌ Débil';
-            }
-        });
 
-        /* ========== HELPERS ========== */
-        function showError(element, text) {
-            element.textContent = text;
-            element.style.display = 'block';
-        }
-        function clearMessages() {
-            ['loginError','registerError','registerSuccess'].forEach(id => {
-                const el = document.getElementById(id);
-                if (el) el.style.display = 'none';
-            });
-        }
+                strengthBar.className =
+                    'password-strength strong';
 
-        /* ========== VALIDACIÓN Y SUBMIT DEL LOGIN (ahora llama al backend) ========== */
-        document.getElementById('formLogin').addEventListener('submit', async function(e) {
-            e.preventDefault();
-
-            const user = document.getElementById('user').value.trim();
-            const pass = document.getElementById('pass').value.trim();
-            const loginError = document.getElementById('loginError');
-            const authBox = document.getElementById('authBox');
-
-            clearMessages();
-
-            if (user === '' || pass === '') {
-                showError(loginError, '❌ Por favor, completa todos los campos');
-                authBox.classList.add('shake');
-                setTimeout(() => authBox.classList.remove('shake'), 500);
-                return;
+                strengthText.textContent =
+                    '✅ Fuerte';
             }
 
-            try {
-                const res = await fetch(API_BASE + '/api/login', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ user, pass })
-                });
-                const data = await res.json();
-                if (!res.ok) {
-                    showError(loginError, '❌ ' + (data.error || 'Error en el login'));
-                    authBox.classList.add('shake');
-                    setTimeout(() => authBox.classList.remove('shake'), 500);
-                    return;
+        }
+    );
+}
+
+/* ========== LOGIN ========== */
+document
+.getElementById('formLogin')
+.addEventListener(
+    'submit',
+    async function (e) {
+
+        e.preventDefault();
+
+        clearMessages();
+
+        const user =
+            document.getElementById('user')
+            .value.trim();
+
+        const pass =
+            document.getElementById('pass')
+            .value.trim();
+
+        const loginError =
+            document.getElementById(
+                'loginError'
+            );
+
+        const loginBtn =
+            this.querySelector(
+                'button[type="submit"]'
+            );
+
+        if (!user || !pass) {
+
+            showError(
+                loginError,
+                '❌ Complete todos los campos'
+            );
+
+            shakeBox();
+            return;
+        }
+
+        loginBtn.disabled = true;
+        loginBtn.textContent =
+            'Ingresando...';
+
+        try {
+
+            const data =
+                await apiRequest(
+                    '/api/login',
+                    { user, pass }
+                );
+
+            saveSession(data);
+
+            alert(
+                `✅ Bienvenido ${data.user.username}`
+            );
+
+            // window.location.href =
+            // '/dashboard.html';
+
+        } catch (error) {
+
+            showError(
+                loginError,
+                '❌ ' + error.message
+            );
+
+            shakeBox();
+
+        } finally {
+
+            loginBtn.disabled = false;
+            loginBtn.textContent =
+                'Iniciar Sesión';
+        }
+    }
+);
+
+/* ========== REGISTRO ========== */
+document
+.getElementById('formRegister')
+.addEventListener(
+    'submit',
+    async function (e) {
+
+        e.preventDefault();
+
+        clearMessages();
+
+        const fullname =
+            document.getElementById(
+                'fullname'
+            ).value.trim();
+
+        const email =
+            document.getElementById(
+                'email'
+            ).value.trim();
+
+        const username =
+            document.getElementById(
+                'username'
+            ).value.trim();
+
+        const newpass =
+            document.getElementById(
+                'newpass'
+            ).value;
+
+        const confirmpass =
+            document.getElementById(
+                'confirmpass'
+            ).value;
+
+        const department =
+            document.getElementById(
+                'department'
+            ).value;
+
+        const registerError =
+            document.getElementById(
+                'registerError'
+            );
+
+        const registerBtn =
+            this.querySelector(
+                'button[type="submit"]'
+            );
+
+        if (
+            !fullname ||
+            !email ||
+            !username ||
+            !newpass ||
+            !confirmpass ||
+            !department
+        ) {
+            showError(
+                registerError,
+                '❌ Complete todos los campos'
+            );
+
+            shakeBox();
+            return;
+        }
+
+        const emailRegex =
+            /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        if (!emailRegex.test(email)) {
+
+            showError(
+                registerError,
+                '❌ Correo electrónico inválido'
+            );
+
+            shakeBox();
+            return;
+        }
+
+        if (username.length < 4) {
+
+            showError(
+                registerError,
+                '❌ Usuario mínimo 4 caracteres'
+            );
+
+            shakeBox();
+            return;
+        }
+
+        const passwordRegex =
+            /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/;
+
+        if (
+            !passwordRegex.test(newpass)
+        ) {
+
+            showError(
+                registerError,
+                '❌ Debe incluir mayúscula, minúscula y número'
+            );
+
+            shakeBox();
+            return;
+        }
+
+        if (newpass !== confirmpass) {
+
+            showError(
+                registerError,
+                '❌ Las contraseñas no coinciden'
+            );
+
+            shakeBox();
+            return;
+        }
+
+        registerBtn.disabled = true;
+        registerBtn.textContent =
+            'Creando cuenta...';
+
+        try {
+
+            const data =
+                await apiRequest(
+                    '/api/register',
+                    {
+                        fullname,
+                        email,
+                        username,
+                        password: newpass,
+                        department
+                    }
+                );
+
+            saveSession(data);
+
+            showSuccess(
+                '✅ Cuenta creada exitosamente'
+            );
+
+            setTimeout(() => {
+
+                this.reset();
+
+                toggleForms();
+
+            }, 1500);
+
+        } catch (error) {
+
+            showError(
+                registerError,
+                '❌ ' + error.message
+            );
+
+            shakeBox();
+
+        } finally {
+
+            registerBtn.disabled = false;
+
+            registerBtn.textContent =
+                'Registrarse';
+        }
+    }
+);
+
+/* ========== PERFIL DEL USUARIO ========== */
+async function me() {
+
+    const token =
+        localStorage.getItem('token');
+
+    if (!token) return null;
+
+    try {
+
+        const response =
+            await fetch(
+                `${API_BASE}/api/me`,
+                {
+                    headers: {
+                        Authorization:
+                            'Bearer ' + token
+                    }
                 }
+            );
 
-                // Guardar token y usuario
-                localStorage.setItem('token', data.token);
-                localStorage.setItem('user', JSON.stringify(data.user));
+        if (!response.ok)
+            return null;
 
-                // Redirigir o mostrar mensaje
-                alert('✅ Bienvenido, ' + data.user.username + '!');
-                // Si quieres redirigir:
-                // window.location.href = '/dashboard.html';
+        const data =
+            await response.json();
 
-            } catch (err) {
-                console.error(err);
-                showError(loginError, '❌ Error de conexión con el servidor');
-            }
-        });
+        return data.user;
 
-        /* ========== VALIDACIÓN Y SUBMIT DEL REGISTRO (ahora llama al backend) ========== */
-        document.getElementById('formRegister').addEventListener('submit', async function(e) {
-            e.preventDefault();
+    } catch {
 
-            const fullname = document.getElementById('fullname').value.trim();
-            const email = document.getElementById('email').value.trim();
-            const username = document.getElementById('username').value.trim();
-            const newpass = document.getElementById('newpass').value;
-            const confirmpass = document.getElementById('confirmpass').value;
-            const department = document.getElementById('department').value;
-            const registerError = document.getElementById('registerError');
-            const registerSuccess = document.getElementById('registerSuccess');
-            const authBox = document.getElementById('authBox');
-
-            registerError.style.display = 'none';
-            registerSuccess.style.display = 'none';
-
-            // Validaciones
-            if (!fullname || !email || !username || !newpass || !confirmpass || !department) {
-                showError(registerError, '❌ Por favor, completa todos los campos');
-                authBox.classList.add('shake');
-                setTimeout(() => authBox.classList.remove('shake'), 500);
-                return;
-            }
-
-            if (!email.includes('@')) {
-                showError(registerError, '❌ El email no es válido');
-                authBox.classList.add('shake');
-                setTimeout(() => authBox.classList.remove('shake'), 500);
-                return;
-            }
-
-            if (username.length < 4) {
-                showError(registerError, '❌ El usuario debe tener al menos 4 caracteres');
-                authBox.classList.add('shake');
-                setTimeout(() => authBox.classList.remove('shake'), 500);
-                return;
-            }
-
-            if (newpass.length < 8) {
-                showError(registerError, '❌ La contraseña debe tener al menos 8 caracteres');
-                authBox.classList.add('shake');
-                setTimeout(() => authBox.classList.remove('shake'), 500);
-                return;
-            }
-
-            if (newpass !== confirmpass) {
-                showError(registerError, '❌ Las contraseñas no coinciden');
-                authBox.classList.add('shake');
-                setTimeout(() => authBox.classList.remove('shake'), 500);
-                return;
-            }
-
-            try {
-                const res = await fetch(API_BASE + '/api/register', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ fullname, email, username, password: newpass, department })
-                });
-                const data = await res.json();
-                if (!res.ok) {
-                    showError(registerError, '❌ ' + (data.error || 'Error en registro'));
-                    authBox.classList.add('shake');
-                    setTimeout(() => authBox.classList.remove('shake'), 500);
-                    return;
-                }
-
-                // Guardar token y mostrar éxito
-                registerSuccess.textContent = '✅ ¡Cuenta creada exitosamente!';
-                registerSuccess.style.display = 'block';
-                localStorage.setItem('token', data.token);
-                localStorage.setItem('user', JSON.stringify(data.user));
-
-                // Limpiar y volver a login
-                setTimeout(() => {
-                    document.getElementById('formRegister').reset();
-                    toggleForms();
-                }, 1200);
-
-            } catch (err) {
-                console.error(err);
-                showError(registerError, '❌ Error de conexión con el servidor');
-            }
-        });
-
-        /* ========== Opcional: función para obtener datos del usuario con el token ==========
-           Ejemplo de uso: obtener perfil y mostrar en dashboard
-        */
-        async function me() {
-            const token = localStorage.getItem('token');
-            if (!token) return null;
-            try {
-                const res = await fetch(API_BASE + '/api/me', {
-                    headers: { 'Authorization': 'Bearer ' + token }
-                });
-                if (!res.ok) return null;
-                const data = await res.json();
-                return data.user;
-            } catch (err) {
-                return null;
-            }
-        }
-
-    </script>
+        return null;
+    }
+}
+</script>
 
 </body>
 </html>
