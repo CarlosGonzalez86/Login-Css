@@ -327,7 +327,7 @@
             <!-- FORMULARIO DE LOGIN -->
             <div class="form-section active" id="loginForm">
                 <h2>Acceso Institucional</h2>
-                
+
                 <div class="message error" id="loginError"></div>
 
                 <form id="formLogin">
@@ -348,7 +348,7 @@
             <!-- FORMULARIO DE REGISTRO -->
             <div class="form-section" id="registerForm">
                 <h2>Crear Cuenta</h2>
-                
+
                 <div class="message error" id="registerError"></div>
                 <div class="message success" id="registerSuccess"></div>
 
@@ -426,6 +426,7 @@ if (hour >= 18 || hour <= 6) {
 
 /* ========== HELPERS ========== */
 function showError(element, text) {
+    element.className = 'message error';
     element.textContent = text;
     element.style.display = 'block';
 }
@@ -434,6 +435,7 @@ function showSuccess(text) {
     const success = document.getElementById('registerSuccess');
 
     if (success) {
+        success.className = 'message success';
         success.textContent = text;
         success.style.display = 'block';
     }
@@ -532,11 +534,9 @@ document.addEventListener(
         if (
             token &&
             !isTokenExpired() &&
-            window.location.pathname !==
-            '/dashboard.html'
+            window.location.pathname !== '/empleado.html'
         ) {
-            // window.location.href =
-            // '/dashboard.html';
+            window.location.href = 'empleado.html';
         }
 
     }
@@ -697,12 +697,15 @@ document
 
             saveSession(data);
 
-            alert(
-                `✅ Bienvenido ${data.user.username}`
-            );
+            const nombreUsuario = data.user.fullname || data.user.username || user;
 
-            // window.location.href =
-            // '/dashboard.html';
+            loginError.className = 'message success';
+            loginError.textContent = `✅ Bienvenido, ${nombreUsuario}. Redirigiendo...`;
+            loginError.style.display = 'block';
+
+            setTimeout(() => {
+                window.location.href = 'empleado.html';
+            }, 1500);
 
         } catch (error) {
 
@@ -717,7 +720,7 @@ document
 
             loginBtn.disabled = false;
             loginBtn.textContent =
-                'Iniciar Sesión';
+                'Ingresar';
         }
     }
 );
