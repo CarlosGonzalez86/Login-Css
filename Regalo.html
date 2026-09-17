@@ -183,7 +183,7 @@ button:hover{
 </div>
 
 <audio id="musica" loop preload="auto">
-    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+    <source src="assets/piano-suave.mp3" type="audio/mpeg">
     Tu navegador no soporta audio HTML5.
 </audio>
 
@@ -193,7 +193,6 @@ const carta = document.getElementById("carta");
 const btnCarta = document.getElementById("btnCarta");
 
 btnCarta.addEventListener("click", () => {
-
     if(carta.style.display === "block"){
         carta.style.display = "none";
         btnCarta.innerHTML = "💌 Abrir Carta Especial";
@@ -201,14 +200,12 @@ btnCarta.addEventListener("click", () => {
         carta.style.display = "block";
         btnCarta.innerHTML = "❤️ Carta Abierta";
     }
-
 });
 
 const musica = document.getElementById("musica");
 const btnMusica = document.getElementById("btnMusica");
 
 btnMusica.addEventListener("click", () => {
-
     if(musica.paused){
         musica.play();
         btnMusica.innerHTML = "⏸️ Pausar Música";
@@ -216,15 +213,12 @@ btnMusica.addEventListener("click", () => {
         musica.pause();
         btnMusica.innerHTML = "🎵 Reproducir Música";
     }
-
 });
 
 function crearElemento(){
-
     const iconos = ["❤️","🎂","🎉","🌹","✨","💖"];
 
     const el = document.createElement("div");
-
     el.className = "flotante";
     el.innerHTML = iconos[Math.floor(Math.random()*iconos.length)];
 
