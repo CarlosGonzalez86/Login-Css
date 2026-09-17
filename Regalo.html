@@ -14,18 +14,23 @@
     box-sizing:border-box;
 }
 
+html{
+    scroll-behavior:smooth;
+}
+
 body{
     font-family:'Segoe UI',sans-serif;
     background:linear-gradient(135deg,#1a0010,#3d0c2e,#5c1744);
     min-height:100vh;
-    overflow:hidden;
+    overflow-x:hidden;
+    overflow-y:auto;
     color:white;
 }
 
 .container{
     width:95%;
     max-width:900px;
-    margin:20px auto;
+    margin:20px auto 100px auto;
     text-align:center;
     position:relative;
     z-index:10;
@@ -46,7 +51,7 @@ h1{
 
 .subtitulo{
     margin-top:15px;
-    font-size:clamp(1rem,3vw,1.2rem);
+    font-size:clamp(1rem,3vw,1.3rem);
     color:#ffeaf2;
 }
 
@@ -59,8 +64,8 @@ button{
     color:white;
     cursor:pointer;
     font-size:1rem;
+    box-shadow:0 5px 15px rgba(0,0,0,.3);
     transition:.3s;
-    box-shadow:0 5px 15px rgba(0,0,0,.25);
 }
 
 button:hover{
@@ -74,9 +79,9 @@ button:hover{
     backdrop-filter:blur(10px);
     border-radius:25px;
     padding:25px;
-    line-height:1.8;
     text-align:left;
-    min-height:300px;
+    line-height:1.9;
+    overflow:visible;
 }
 
 #textoCarta{
@@ -97,7 +102,7 @@ button:hover{
 .mensaje-final{
     margin-top:25px;
     text-align:center;
-    font-size:1.3rem;
+    font-size:1.4rem;
     color:#ffd6e7;
     font-weight:bold;
 }
@@ -107,6 +112,22 @@ button:hover{
     text-align:center;
     color:#fff0f6;
     font-style:italic;
+}
+
+#sorpresa{
+    display:none;
+    text-align:center;
+    margin-top:25px;
+    font-size:1.3rem;
+    font-weight:bold;
+    color:#ffe57f;
+    animation:brillo 2s infinite;
+}
+
+@keyframes brillo{
+    50%{
+        text-shadow:0 0 15px gold;
+    }
 }
 
 .flotante{
@@ -148,6 +169,7 @@ button:hover{
 }
 
 </style>
+
 </head>
 
 <body>
@@ -172,6 +194,10 @@ button:hover{
             🎂❤️ ¡Feliz Cumpleaños Amiga! ❤️🎂
         </div>
 
+        <div id="sorpresa">
+            🌻 Eres una persona muy especial, Caroline 🌻
+        </div>
+
         <div class="firma">
             🌻 Con mucho cariño para una amiga increíble 🌻
             <br><br>
@@ -187,6 +213,7 @@ button:hover{
 const carta = document.getElementById("carta");
 const btnCarta = document.getElementById("btnCarta");
 const textoCarta = document.getElementById("textoCarta");
+const sorpresa = document.getElementById("sorpresa");
 
 const mensaje = `Querida Caroline Romero,
 
@@ -212,7 +239,7 @@ Gracias por existir y por ser una persona tan maravillosa.
 
 Espero que este día esté lleno de sonrisas, abrazos sinceros y momentos que recuerdes para siempre.
 
-✨ Feliz Cumpleaños Caroline. ✨`;
+✨ Feliz Cumpleaños Caroline ✨`;
 
 btnCarta.addEventListener("click", ()=>{
 
@@ -221,6 +248,7 @@ btnCarta.addEventListener("click", ()=>{
         carta.style.display = "none";
         btnCarta.innerHTML = "💌 Abrir Carta Especial";
         textoCarta.innerHTML = "";
+        sorpresa.style.display = "none";
         return;
     }
 
@@ -228,6 +256,7 @@ btnCarta.addEventListener("click", ()=>{
     btnCarta.innerHTML = "❤️ Carta Abierta";
 
     textoCarta.innerHTML = "";
+    sorpresa.style.display = "none";
 
     let i = 0;
 
@@ -241,20 +270,31 @@ btnCarta.addEventListener("click", ()=>{
 
             i++;
 
+            window.scrollTo({
+                top:document.body.scrollHeight,
+                behavior:"smooth"
+            });
+
             setTimeout(escribir,30);
 
         }else{
 
             textoCarta.innerHTML = mensaje;
 
+            sorpresa.style.display = "block";
+
+            window.scrollTo({
+                top:document.body.scrollHeight,
+                behavior:"smooth"
+            });
+
         }
+
     }
 
     escribir();
 
 });
-
-// LLUVIA DE GIRASOLES
 
 function crearGirasol(){
 
@@ -262,11 +302,10 @@ function crearGirasol(){
         "🌻",
         "🌻",
         "🌻",
-        "🌻",
         "💛",
-        "✨",
+        "🌼",
         "❤️",
-        "🌼"
+        "✨"
     ];
 
     const item = document.createElement("div");
@@ -292,7 +331,7 @@ function crearGirasol(){
     },12000);
 }
 
-setInterval(crearGirasol,180);
+setInterval(crearGirasol,200);
 
 </script>
 
