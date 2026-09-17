@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Feliz Cumpleaños Caroline Romero ❤️</title>
 
 <style>
@@ -22,16 +23,16 @@ body{
 }
 
 .container{
+    width:95%;
     max-width:900px;
-    margin:30px auto;
-    padding:30px;
+    margin:20px auto;
     text-align:center;
     position:relative;
     z-index:10;
 }
 
 h1{
-    font-size:3rem;
+    font-size:clamp(2rem,5vw,3rem);
     color:#ffd6e7;
     text-shadow:0 0 15px #ff69b4;
     animation:latido 2s infinite;
@@ -45,15 +46,12 @@ h1{
 
 .subtitulo{
     margin-top:15px;
+    font-size:clamp(1rem,3vw,1.2rem);
     color:#ffeaf2;
-    font-size:1.2rem;
-}
-
-.botones{
-    margin-top:30px;
 }
 
 button{
+    margin-top:25px;
     padding:15px 30px;
     border:none;
     border-radius:50px;
@@ -61,55 +59,60 @@ button{
     color:white;
     cursor:pointer;
     font-size:1rem;
-    box-shadow:0 5px 15px rgba(0,0,0,.2);
-    transition:0.3s;
+    transition:.3s;
+    box-shadow:0 5px 15px rgba(0,0,0,.25);
 }
 
 button:hover{
-    transform:scale(1.08);
+    transform:scale(1.05);
 }
 
 .carta{
     display:none;
-    margin-top:30px;
-    padding:30px;
-    background:rgba(255,255,255,0.10);
-    backdrop-filter:blur(12px);
+    margin-top:25px;
+    background:rgba(255,255,255,.10);
+    backdrop-filter:blur(10px);
     border-radius:25px;
-    line-height:1.9;
-    animation:aparecer 1s ease;
-    box-shadow:0 0 25px rgba(255,255,255,.1);
+    padding:25px;
+    line-height:1.8;
+    text-align:left;
+    min-height:300px;
 }
 
-@keyframes aparecer{
-    from{
+#textoCarta{
+    white-space:pre-line;
+    font-size:1rem;
+}
+
+.cursor{
+    animation:parpadear .8s infinite;
+}
+
+@keyframes parpadear{
+    50%{
         opacity:0;
-        transform:translateY(30px);
-    }
-    to{
-        opacity:1;
-        transform:translateY(0);
     }
 }
 
 .mensaje-final{
     margin-top:25px;
-    font-size:1.5rem;
+    text-align:center;
+    font-size:1.3rem;
     color:#ffd6e7;
     font-weight:bold;
 }
 
 .firma{
     margin-top:25px;
-    color:#ffeaf2;
+    text-align:center;
+    color:#fff0f6;
     font-style:italic;
-    font-size:1.1rem;
 }
 
 .flotante{
     position:fixed;
-    pointer-events:none;
     top:-100px;
+    pointer-events:none;
     z-index:1;
     animation:caer linear forwards;
 }
@@ -132,34 +135,17 @@ button:hover{
 
 }
 
-@media(max-width:768px){
-
-    h1{
-        font-size:2rem;
-    }
+@media(max-width:600px){
 
     .carta{
-        font-size:0.95rem;
-        padding:20px;
+        padding:18px;
+    }
+
+    #textoCarta{
+        font-size:.95rem;
     }
 
 }
-#textoCarta{
-    white-space: pre-line;
-    text-align:left;
-}
-
-.cursor{
-    display:inline-block;
-    animation:parpadeo .8s infinite;
-}
-
-@keyframes parpadeo{
-    50%{
-        opacity:0;
-    }
-}
-
 
 </style>
 </head>
@@ -174,66 +160,29 @@ button:hover{
         Hoy celebramos a una persona hermosa, especial y única.
     </p>
 
-    <div class="botones">
-
-        <button id="btnCarta">
-            💌 Abrir Carta Especial
-        </button>
-
-    </div>
+    <button id="btnCarta">
+        💌 Abrir Carta Especial
+    </button>
 
     <div id="carta" class="carta">
 
-        <p>
+        <p id="textoCarta"></p>
 
-        Querida Caroline Romero,
+        <div class="mensaje-final">
+            🎂❤️ ¡Feliz Cumpleaños Amiga! ❤️🎂
+        </div>
 
-        Hoy es un día muy especial porque celebramos que cumples un año más de vida.
+        <div class="firma">
+            🌻 Con mucho cariño para una amiga increíble 🌻
+            <br><br>
+            Carlos 💛
+        </div>
 
-        Quiero desearte un cumpleaños lleno de felicidad, salud, sueños cumplidos y momentos inolvidables.
-
-        Hay personas que destacan por su belleza y otras por la luz que transmiten. Tú tienes ambas cualidades.
-
-        Tu sonrisa ilumina los días y tu presencia tiene la capacidad de hacer más bonito cualquier lugar.
-
-        Y si hay algo que siempre llama la atención con una elegancia imposible de ignorar, es tu hermoso cabello negro.
-
-        Tan brillante como una noche estrellada y tan elegante como una obra de arte.
-
-        Pero más allá de lo que se ve, lo que realmente te hace especial es tu forma de ser, tu bondad y el hermoso corazón que tienes.
-
-        Que este nuevo año de vida esté lleno de bendiciones, nuevas aventuras y muchas razones para sonreír.
-
-        Nunca olvides lo increíble que eres.
-
-        Gracias por existir y por ser una persona tan maravillosa.
-
-        Espero que este día esté lleno de sonrisas, abrazos sinceros y momentos que recuerdes para siempre.
-
-        </p>
-
-        <div id="carta" class="carta">
-
-    <p id="textoCarta"></p>
-
-    <div class="mensaje-final">
-        🎂❤️ ¡Feliz Cumpleaños Amiga! ❤️🎂
     </div>
-
-    <div class="firma">
-        🌻 Con mucho cariño para una amiga increíble 🌻
-        <br><br>
-        Carlos 💛
-    </div>
-
-</div>
-
 
 </div>
 
 <script>
-
-// CARTA
 
 const carta = document.getElementById("carta");
 const btnCarta = document.getElementById("btnCarta");
@@ -261,58 +210,51 @@ Nunca olvides lo increíble que eres.
 
 Gracias por existir y por ser una persona tan maravillosa.
 
-Espero que este día esté lleno de sonrisas, abrazos sinceros y momentos que recuerdes para siempre.`;
+Espero que este día esté lleno de sonrisas, abrazos sinceros y momentos que recuerdes para siempre.
 
-let escribiendo = false;
+✨ Feliz Cumpleaños Caroline. ✨`;
 
-btnCarta.addEventListener("click", () => {
+btnCarta.addEventListener("click", ()=>{
 
     if(carta.style.display === "block"){
 
         carta.style.display = "none";
         btnCarta.innerHTML = "💌 Abrir Carta Especial";
         textoCarta.innerHTML = "";
-        escribiendo = false;
-
         return;
     }
 
     carta.style.display = "block";
     btnCarta.innerHTML = "❤️ Carta Abierta";
 
-    if(!escribiendo){
+    textoCarta.innerHTML = "";
 
-        escribiendo = true;
-        textoCarta.innerHTML = "";
+    let i = 0;
 
-        let i = 0;
+    function escribir(){
 
-        function escribir(){
+        if(i < mensaje.length){
 
-            if(i < mensaje.length){
+            textoCarta.innerHTML =
+            mensaje.substring(0,i+1) +
+            '<span class="cursor">|</span>';
 
-                textoCarta.innerHTML =
-                    mensaje.substring(0, i + 1) +
-                    '<span class="cursor">|</span>';
+            i++;
 
-                i++;
+            setTimeout(escribir,30);
 
-                setTimeout(escribir, 35);
+        }else{
 
-            }else{
-
-                textoCarta.innerHTML = mensaje;
-
-            }
+            textoCarta.innerHTML = mensaje;
 
         }
-
-        escribir();
     }
+
+    escribir();
+
 });
 
-
-// GIRASOLES
+// LLUVIA DE GIRASOLES
 
 function crearGirasol(){
 
@@ -322,34 +264,31 @@ function crearGirasol(){
         "🌻",
         "🌻",
         "💛",
-        "❤️",
         "✨",
+        "❤️",
         "🌼"
     ];
 
-    const girasol = document.createElement("div");
+    const item = document.createElement("div");
 
-    girasol.classList.add("flotante");
+    item.classList.add("flotante");
 
-    girasol.innerHTML =
-        elementos[Math.floor(Math.random()*elementos.length)];
+    item.innerHTML =
+    elementos[Math.floor(Math.random()*elementos.length)];
 
-    girasol.style.left =
-        Math.random()*100 + "vw";
+    item.style.left =
+    Math.random()*100 + "vw";
 
-    girasol.style.fontSize =
-        (25 + Math.random()*25) + "px";
+    item.style.fontSize =
+    (20 + Math.random()*25) + "px";
 
-    girasol.style.animationDuration =
-        (6 + Math.random()*6) + "s";
+    item.style.animationDuration =
+    (6 + Math.random()*6) + "s";
 
-    girasol.style.opacity =
-        0.7 + Math.random()*0.3;
+    document.body.appendChild(item);
 
-    document.body.appendChild(girasol);
-
-    setTimeout(() => {
-        girasol.remove();
+    setTimeout(()=>{
+        item.remove();
     },12000);
 }
 
