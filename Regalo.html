@@ -3,7 +3,6 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Feliz Cumpleaños Caroline Romero ❤️</title>
 
 <style>
@@ -15,57 +14,50 @@
 }
 
 body{
-    background:linear-gradient(135deg,#090909,#24101a,#4b1230);
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg,#1a0010,#3d0c2e,#5c1744);
     min-height:100vh;
-    font-family:Georgia, serif;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    overflow:hidden;
+    overflow-x:hidden;
     color:white;
 }
 
-.tarjeta{
-    width:90%;
+.container{
     max-width:900px;
-    padding:40px;
+    margin:50px auto;
+    padding:30px;
     text-align:center;
-    background:rgba(255,255,255,0.08);
-    backdrop-filter:blur(12px);
-    border-radius:30px;
-    box-shadow:0 0 40px rgba(255,105,180,.25);
-    position:relative;
-    z-index:10;
 }
 
 h1{
     font-size:3rem;
-    color:#ffd3df;
-    margin-bottom:10px;
-    animation:latido 1.8s infinite;
+    color:#ffd6e7;
+    text-shadow:0 0 15px #ff69b4;
+    animation:latido 2s infinite;
 }
 
 @keyframes latido{
-    50%{
-        transform:scale(1.03);
-    }
+    50%{transform:scale(1.04);}
 }
 
 .subtitulo{
+    margin-top:15px;
+    color:#ffeaf2;
     font-size:1.2rem;
-    color:#ffe7ef;
-    margin-bottom:25px;
+}
+
+.botones{
+    margin-top:30px;
 }
 
 button{
-    background:#ff4f87;
+    padding:15px 25px;
+    margin:10px;
     border:none;
-    color:white;
-    padding:15px 30px;
-    border-radius:35px;
+    border-radius:50px;
     cursor:pointer;
+    background:#ff4f87;
+    color:white;
     font-size:1rem;
-    margin:5px;
     transition:.3s;
 }
 
@@ -73,19 +65,21 @@ button:hover{
     transform:scale(1.08);
 }
 
-.poema{
+.carta{
     display:none;
-    margin-top:25px;
-    line-height:2;
-    font-size:1.15rem;
-    color:#fff3f7;
-    animation:aparecer 1.8s;
+    margin-top:30px;
+    background:rgba(255,255,255,.1);
+    backdrop-filter:blur(10px);
+    padding:30px;
+    border-radius:20px;
+    line-height:1.9;
+    animation:aparecer 1s ease;
 }
 
 @keyframes aparecer{
     from{
         opacity:0;
-        transform:translateY(20px);
+        transform:translateY(30px);
     }
     to{
         opacity:1;
@@ -95,15 +89,16 @@ button:hover{
 
 .firma{
     margin-top:25px;
-    color:#ffd3df;
+    color:#ffd6e7;
     font-style:italic;
     font-size:1.1rem;
 }
 
 .flotante{
-    position:absolute;
+    position:fixed;
     pointer-events:none;
-    animation:subir linear infinite;
+    animation:subir linear forwards;
+    z-index:1;
 }
 
 @keyframes subir{
@@ -112,15 +107,15 @@ button:hover{
         opacity:1;
     }
     to{
-        transform:translateY(-100px);
+        transform:translateY(-120px);
         opacity:0;
     }
 }
 
 .mensaje-final{
-    font-size:1.5rem;
-    color:#ffd3df;
     margin-top:25px;
+    font-size:1.4rem;
+    color:#ffd6e7;
     font-weight:bold;
 }
 
@@ -129,81 +124,61 @@ button:hover{
 
 <body>
 
-<div class="tarjeta">
+<div class="container">
 
-<h1>🎂 Feliz Cumpleaños Caroline Romero ❤️</h1>
+    <h1>🎂 Feliz Cumpleaños Caroline Romero ❤️</h1>
 
-<p class="subtitulo">
-Hoy celebra su cumpleaños una persona hermosa, especial y verdaderamente inolvidable.
-</p>
+    <p class="subtitulo">
+        Hoy celebramos a una persona hermosa, especial y única.
+    </p>
 
-<button onclick="mostrarCarta()">
-💌 Abrir Carta Especial
-</button>
+    <div class="botones">
+        <button id="btnCarta">
+            💌 Abrir Carta Especial
+        </button>
 
-<button onclick="toggleMusica()">
-🎵 Música
-</button>
+        <button id="btnMusica">
+            🎵 Reproducir Música
+        </button>
+    </div>
 
-<div class="poema" id="carta">
+    <div id="carta" class="carta">
 
-<p>
+        <p>
 
-Querida Caroline Romero,
+        Querida Caroline Romero,
 
-Hoy es un día muy especial porque el mundo celebra el nacimiento de una persona maravillosa.
+        Hoy es un día muy especial, porque celebramos tu vida.
 
-Quiero desearte un cumpleaños lleno de sonrisas, felicidad, bendiciones y momentos que permanezcan para siempre en tu corazón.
+        Quiero desearte un cumpleaños lleno de felicidad, salud, sueños cumplidos y momentos inolvidables.
 
-Existen personas que destacan por su belleza, pero también existen personas cuya esencia ilumina la vida de quienes las rodean. Tú tienes ambas cualidades.
+        Hay personas que destacan por su belleza y otras por la luz que transmiten. Tú tienes ambas cualidades.
 
-Tu sonrisa transmite alegría, tu forma de ser inspira tranquilidad y tu presencia tiene esa capacidad especial de hacer que todo parezca un poco más bonito.
+        Tu sonrisa ilumina los días y tu presencia tiene la capacidad de hacer más bonito cualquier lugar.
 
-Y si hay algo que siempre llama la atención con una elegancia imposible de ignorar, es tu hermoso cabello negro.
+        Y si hay algo que siempre llama la atención con una elegancia imposible de ignorar, es tu hermoso cabello negro.
 
-Tan brillante como una noche estrellada, tan elegante como la más fina obra de arte y tan único como tú.
+        Tan brillante como una noche estrellada y tan elegante como una obra de arte.
 
-La forma en que la luz se refleja en él parece contar una historia de belleza y encanto que nadie podría pasar por alto.
+        Pero más allá de lo que se ve, lo que realmente te hace especial es tu forma de ser, tu bondad y el hermoso corazón que tienes.
 
-Pero lo más hermoso de ti no está solamente en lo que se ve.
+        Que este nuevo año de vida esté lleno de bendiciones, nuevas aventuras y muchas razones para sonreír.
 
-Está en tu bondad.
+        Nunca olvides lo increíble que eres.
 
-Está en tu corazón.
+        Gracias por existir y por ser una persona tan maravillosa.
 
-Está en tu esencia.
+        </p>
 
-Está en esa hermosa persona que eres cada día.
+        <div class="mensaje-final">
+            🎂❤️ ¡Feliz Cumpleaños Amiga! ❤️🎂
+        </div>
 
-Hoy deseo que cada sueño encuentre el camino para hacerse realidad.
+        <div class="firma">
+            Con mucho cariño y admiración 🌹
+        </div>
 
-Que nunca te falten razones para sonreír.
-
-Que cada nuevo amanecer traiga esperanza.
-
-Y que la vida te sorprenda con cosas maravillosas porque te las mereces.
-
-Gracias por existir.
-
-Gracias por ser quien eres.
-
-Y gracias por hacer más bonito este mundo con tu presencia.
-
-✨ Feliz Cumpleaños, Caroline Romero. ✨
-
-Que este nuevo año de vida venga acompañado de mucha salud, éxito, amor y felicidad.
-
-</p>
-
-<div class="mensaje-final">
-🎂🌹❤️ ¡Feliz Cumpleaños Amiga! ❤️🌹🎂
-</div>
-
-<div class="firma">
-Con mucho cariño y admiración 💖
-</div>
-
-</div>
+    </div>
 
 </div>
 
@@ -213,55 +188,53 @@ Con mucho cariño y admiración 💖
 
 <script>
 
+const carta = document.getElementById("carta");
+const btnCarta = document.getElementById("btnCarta");
+
+btnCarta.addEventListener("click", () => {
+
+    if(carta.style.display === "block"){
+        carta.style.display = "none";
+        btnCarta.innerHTML = "💌 Abrir Carta Especial";
+    }else{
+        carta.style.display = "block";
+        btnCarta.innerHTML = "❤️ Carta Abierta";
+    }
+
+});
+
 const musica = document.getElementById("musica");
+const btnMusica = document.getElementById("btnMusica");
 
-function mostrarCarta(){
-    document.getElementById("carta").style.display="block";
-}
-
-function toggleMusica(){
+btnMusica.addEventListener("click", () => {
 
     if(musica.paused){
         musica.play();
+        btnMusica.innerHTML = "⏸️ Pausar Música";
     }else{
         musica.pause();
+        btnMusica.innerHTML = "🎵 Reproducir Música";
     }
-}
 
-document.addEventListener("click", function iniciar(){
-    musica.play().catch(()=>{});
-}, {once:true});
+});
 
 function crearElemento(){
 
-    const emojis = [
-        "❤️",
-        "🎂",
-        "🎉",
-        "🌹",
-        "✨",
-        "💖"
-    ];
+    const iconos = ["❤️","🎂","🎉","🌹","✨","💖"];
 
-    const elemento = document.createElement("div");
+    const el = document.createElement("div");
 
-    elemento.classList.add("flotante");
-    elemento.innerHTML =
-    emojis[Math.floor(Math.random()*emojis.length)];
+    el.className = "flotante";
+    el.innerHTML = iconos[Math.floor(Math.random()*iconos.length)];
 
-    elemento.style.left =
-    Math.random()*100 + "vw";
+    el.style.left = Math.random()*100 + "vw";
+    el.style.fontSize = (20 + Math.random()*25) + "px";
+    el.style.animationDuration = (5 + Math.random()*5) + "s";
 
-    elemento.style.fontSize =
-    (18 + Math.random()*25) + "px";
-
-    elemento.style.animationDuration =
-    (5 + Math.random()*5) + "s";
-
-    document.body.appendChild(elemento);
+    document.body.appendChild(el);
 
     setTimeout(()=>{
-        elemento.remove();
+        el.remove();
     },10000);
 }
 
