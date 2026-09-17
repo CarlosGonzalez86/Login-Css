@@ -1,221 +1,789 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
 
-<title>Feliz Cumpleaños Caroline Romero ❤️</title>
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    >
 
-<style>
+    <meta name="theme-color" content="#3d0c2e">
 
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-}
+    <title>Feliz Cumpleaños Caroline Romero ❤️</title>
 
-html{
-    scroll-behavior:smooth;
-}
+    <style>
+        /* ==============================
+           CONFIGURACIÓN GENERAL
+        ============================== */
 
-body{
-    font-family:'Segoe UI',sans-serif;
-    background:linear-gradient(135deg,#1a0010,#3d0c2e,#5c1744);
-    min-height:100vh;
-    overflow-x:hidden;
-    overflow-y:auto;
-    color:white;
-}
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-.container{
-    width:95%;
-    max-width:900px;
-    margin:20px auto 100px auto;
-    text-align:center;
-    position:relative;
-    z-index:10;
-}
+        html {
+            min-height: 100%;
+            scroll-behavior: smooth;
+        }
 
-h1{
-    font-size:clamp(2rem,5vw,3rem);
-    color:#ffd6e7;
-    text-shadow:0 0 15px #ff69b4;
-    animation:latido 2s infinite;
-}
+        body {
+            min-height: 100vh;
+            min-height: 100dvh;
+            padding:
+                env(safe-area-inset-top)
+                env(safe-area-inset-right)
+                env(safe-area-inset-bottom)
+                env(safe-area-inset-left);
 
-@keyframes latido{
-    50%{
-        transform:scale(1.05);
-    }
-}
+            font-family: "Segoe UI", Arial, sans-serif;
+            color: white;
+            background:
+                radial-gradient(
+                    circle at top,
+                    rgba(255, 105, 180, 0.22),
+                    transparent 35%
+                ),
+                linear-gradient(
+                    135deg,
+                    #1a0010,
+                    #3d0c2e,
+                    #5c1744
+                );
 
-.subtitulo{
-    margin-top:15px;
-    font-size:clamp(1rem,3vw,1.3rem);
-    color:#ffeaf2;
-}
+            background-attachment: fixed;
 
-button{
-    margin-top:25px;
-    padding:15px 30px;
-    border:none;
-    border-radius:50px;
-    background:#ff4f87;
-    color:white;
-    cursor:pointer;
-    font-size:1rem;
-    box-shadow:0 5px 15px rgba(0,0,0,.3);
-    transition:.3s;
-}
+            /* Permite desplazamiento vertical en celulares */
+            overflow-x: hidden;
+            overflow-y: auto;
+        }
 
-button:hover{
-    transform:scale(1.05);
-}
+        /* ==============================
+           CONTENIDO PRINCIPAL
+        ============================== */
 
-.carta{
-    display:none;
-    margin-top:25px;
-    background:rgba(255,255,255,.10);
-    backdrop-filter:blur(10px);
-    border-radius:25px;
-    padding:25px;
-    text-align:left;
-    line-height:1.9;
-    overflow:visible;
-}
+        .container {
+            position: relative;
+            z-index: 10;
 
-#textoCarta{
-    white-space:pre-line;
-    font-size:1rem;
-}
+            width: min(94%, 900px);
+            min-height: 100vh;
+            min-height: 100dvh;
 
-.cursor{
-    animation:parpadear .8s infinite;
-}
+            margin: 0 auto;
+            padding: 30px 12px 120px;
 
-@keyframes parpadear{
-    50%{
-        opacity:0;
-    }
-}
+            text-align: center;
+        }
 
-.mensaje-final{
-    margin-top:25px;
-    text-align:center;
-    font-size:1.4rem;
-    color:#ffd6e7;
-    font-weight:bold;
-}
+        .encabezado {
+            padding: 20px 10px;
+        }
 
-.firma{
-    margin-top:25px;
-    text-align:center;
-    color:#fff0f6;
-    font-style:italic;
-}
+        h1 {
+            color: #ffd6e7;
+            font-size: clamp(2rem, 8vw, 3.5rem);
+            line-height: 1.15;
 
-#sorpresa{
-    display:none;
-    text-align:center;
-    margin-top:25px;
-    font-size:1.3rem;
-    font-weight:bold;
-    color:#ffe57f;
-    animation:brillo 2s infinite;
-}
+            text-shadow:
+                0 0 10px rgba(255, 105, 180, 0.9),
+                0 0 25px rgba(255, 105, 180, 0.45);
 
-@keyframes brillo{
-    50%{
-        text-shadow:0 0 15px gold;
-    }
-}
+            animation: latido 2s ease-in-out infinite;
+        }
 
-.flotante{
-    position:fixed;
-    top:-100px;
-    pointer-events:none;
-    z-index:1;
-    animation:caer linear forwards;
-}
+        @keyframes latido {
+            0%,
+            100% {
+                transform: scale(1);
+            }
 
-@keyframes caer{
+            50% {
+                transform: scale(1.035);
+            }
+        }
 
-    0%{
-        transform:
-        translateY(-100px)
-        rotate(0deg);
-        opacity:1;
-    }
+        .subtitulo {
+            max-width: 650px;
+            margin: 18px auto 0;
 
-    100%{
-        transform:
-        translateY(120vh)
-        rotate(720deg);
-        opacity:0;
-    }
+            color: #ffeaf2;
+            font-size: clamp(1rem, 4vw, 1.25rem);
+            line-height: 1.6;
+        }
 
-}
+        /* ==============================
+           SOBRE ANIMADO
+        ============================== */
 
-@media(max-width:600px){
+        .zona-sobre {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
 
-    .carta{
-        padding:18px;
-    }
+            margin-top: 30px;
+        }
 
-    #textoCarta{
-        font-size:.95rem;
-    }
+        .boton-sobre {
+            position: relative;
 
-}
+            width: 210px;
+            height: 145px;
 
-</style>
+            padding: 0;
 
+            background: transparent;
+            border: 0;
+            border-radius: 16px;
+
+            cursor: pointer;
+            perspective: 1000px;
+            -webkit-tap-highlight-color: transparent;
+
+            filter: drop-shadow(0 16px 18px rgba(0, 0, 0, 0.35));
+            transition: transform 0.3s ease;
+        }
+
+        .boton-sobre:hover {
+            transform: translateY(-5px) scale(1.03);
+        }
+
+        .boton-sobre:active {
+            transform: scale(0.97);
+        }
+
+        .boton-sobre:focus-visible {
+            outline: 3px solid #ffe876;
+            outline-offset: 8px;
+        }
+
+        .sobre {
+            position: relative;
+
+            width: 100%;
+            height: 100%;
+
+            border-radius: 12px;
+            animation: flotarSobre 2.4s ease-in-out infinite;
+        }
+
+        @keyframes flotarSobre {
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-8px);
+            }
+        }
+
+        /* Parte trasera del sobre */
+        .sobre-fondo {
+            position: absolute;
+            inset: 0;
+
+            overflow: hidden;
+            border-radius: 12px;
+
+            background: linear-gradient(
+                145deg,
+                #fff0bc,
+                #f5cc66
+            );
+
+            border: 2px solid rgba(255, 255, 255, 0.55);
+        }
+
+        /* Papel que sale del sobre */
+        .papel {
+            position: absolute;
+            z-index: 2;
+
+            left: 50%;
+            bottom: 15px;
+
+            width: 82%;
+            height: 92%;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            padding: 15px;
+
+            color: #6b2145;
+            font-family: Georgia, serif;
+            font-size: 0.93rem;
+            font-weight: bold;
+            line-height: 1.35;
+
+            background: linear-gradient(
+                180deg,
+                #ffffff,
+                #fff7fa
+            );
+
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.18);
+
+            transform: translateX(-50%) translateY(20px);
+            transition:
+                transform 0.9s ease,
+                opacity 0.5s ease;
+
+            opacity: 0;
+        }
+
+        /* Solapa superior */
+        .solapa-superior {
+            position: absolute;
+            z-index: 5;
+
+            top: 0;
+            left: 0;
+
+            width: 100%;
+            height: 72%;
+
+            background: linear-gradient(
+                160deg,
+                #ffe99b,
+                #e9b94b
+            );
+
+            clip-path: polygon(0 0, 100% 0, 50% 78%);
+
+            transform-origin: top;
+            transform: rotateX(0deg);
+
+            transition:
+                transform 0.8s ease,
+                z-index 0.2s linear 0.3s;
+        }
+
+        /* Panel frontal */
+        .sobre-frontal {
+            position: absolute;
+            z-index: 4;
+
+            inset: 0;
+            overflow: hidden;
+
+            border-radius: 12px;
+        }
+
+        .sobre-frontal::before,
+        .sobre-frontal::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+
+            width: 72%;
+            height: 100%;
+
+            background: #f6cd66;
+        }
+
+        .sobre-frontal::before {
+            left: 0;
+            clip-path: polygon(0 24%, 100% 100%, 0 100%);
+        }
+
+        .sobre-frontal::after {
+            right: 0;
+            clip-path: polygon(100% 24%, 100% 100%, 0 100%);
+        }
+
+        .sobre-frontal-centro {
+            position: absolute;
+            z-index: 5;
+
+            left: 0;
+            bottom: 0;
+
+            width: 100%;
+            height: 74%;
+
+            background: linear-gradient(
+                160deg,
+                #ffd971,
+                #eebd4e
+            );
+
+            clip-path: polygon(
+                0 100%,
+                0 68%,
+                50% 5%,
+                100% 68%,
+                100% 100%
+            );
+
+            border-radius: 0 0 12px 12px;
+        }
+
+        /* Sello del sobre */
+        .sello {
+            position: absolute;
+            z-index: 8;
+
+            top: 64px;
+            left: 50%;
+
+            width: 48px;
+            height: 48px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            color: white;
+            font-size: 1.45rem;
+
+            background: linear-gradient(
+                145deg,
+                #ff5d91,
+                #d7195e
+            );
+
+            border: 3px solid rgba(255, 255, 255, 0.45);
+            border-radius: 50%;
+
+            box-shadow:
+                0 6px 14px rgba(0, 0, 0, 0.25),
+                inset 0 2px 4px rgba(255, 255, 255, 0.35);
+
+            transform: translateX(-50%);
+            transition:
+                transform 0.45s ease,
+                opacity 0.45s ease;
+        }
+
+        .texto-boton {
+            margin-top: 17px;
+
+            color: #fff5f9;
+            font-size: 1rem;
+            font-weight: 700;
+
+            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.45);
+        }
+
+        /* Estado abierto del sobre */
+
+        .boton-sobre.abierto .sobre {
+            animation: none;
+        }
+
+        .boton-sobre.abierto .solapa-superior {
+            z-index: 1;
+            transform: rotateX(180deg);
+        }
+
+        .boton-sobre.abierto .papel {
+            opacity: 1;
+            transform: translateX(-50%) translateY(-83px);
+        }
+
+        .boton-sobre.abierto .sello {
+            opacity: 0;
+            transform:
+                translateX(-50%)
+                scale(0)
+                rotate(180deg);
+        }
+
+        /* ==============================
+           CARTA
+        ============================== */
+
+        .carta {
+            display: none;
+
+            width: 100%;
+            margin-top: 75px;
+            padding: 30px;
+
+            color: #fffafc;
+            text-align: left;
+            line-height: 1.85;
+
+            background: rgba(255, 255, 255, 0.12);
+            border: 1px solid rgba(255, 255, 255, 0.22);
+            border-radius: 25px;
+
+            -webkit-backdrop-filter: blur(12px);
+            backdrop-filter: blur(12px);
+
+            box-shadow:
+                0 18px 45px rgba(0, 0, 0, 0.25),
+                0 0 25px rgba(255, 105, 180, 0.12);
+        }
+
+        .carta.visible {
+            display: block;
+            animation: aparecerCarta 0.9s ease forwards;
+        }
+
+        @keyframes aparecerCarta {
+            from {
+                opacity: 0;
+                transform: translateY(35px) scale(0.98);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        #textoCarta {
+            min-height: 80px;
+
+            white-space: pre-wrap;
+            overflow-wrap: anywhere;
+
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: clamp(1rem, 3.8vw, 1.12rem);
+            line-height: 1.9;
+        }
+
+        .cursor {
+            display: inline-block;
+            margin-left: 2px;
+
+            color: #ffe873;
+            font-weight: bold;
+
+            animation: parpadear 0.75s steps(1) infinite;
+        }
+
+        @keyframes parpadear {
+            50% {
+                opacity: 0;
+            }
+        }
+
+        .final-carta {
+            display: none;
+            opacity: 0;
+        }
+
+        .final-carta.visible {
+            display: block;
+            animation: mostrarFinal 1.2s ease forwards;
+        }
+
+        @keyframes mostrarFinal {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .mensaje-final {
+            margin-top: 30px;
+
+            color: #ffd6e7;
+            font-size: clamp(1.25rem, 5vw, 1.65rem);
+            font-weight: bold;
+            text-align: center;
+
+            text-shadow: 0 0 12px rgba(255, 105, 180, 0.7);
+        }
+
+        .sorpresa {
+            margin-top: 24px;
+
+            color: #ffe876;
+            font-size: clamp(1.1rem, 4vw, 1.35rem);
+            font-weight: bold;
+            text-align: center;
+
+            animation: brillo 2s ease-in-out infinite;
+        }
+
+        @keyframes brillo {
+            0%,
+            100% {
+                text-shadow: 0 0 5px rgba(255, 232, 118, 0.4);
+            }
+
+            50% {
+                text-shadow:
+                    0 0 12px gold,
+                    0 0 22px rgba(255, 215, 0, 0.6);
+            }
+        }
+
+        .firma {
+            margin-top: 26px;
+
+            color: #fff0f6;
+            font-size: 1.08rem;
+            font-style: italic;
+            text-align: center;
+            line-height: 1.7;
+        }
+
+        .btn-cerrar {
+            display: block;
+
+            margin: 28px auto 0;
+            padding: 12px 24px;
+
+            color: white;
+            font-size: 0.95rem;
+            font-weight: bold;
+
+            background: rgba(255, 79, 135, 0.85);
+            border: 1px solid rgba(255, 255, 255, 0.35);
+            border-radius: 30px;
+
+            cursor: pointer;
+            transition:
+                transform 0.25s ease,
+                background 0.25s ease;
+        }
+
+        .btn-cerrar:hover {
+            background: #ff4f87;
+            transform: scale(1.04);
+        }
+
+        /* ==============================
+           LLUVIA DE GIRASOLES
+        ============================== */
+
+        .flotante {
+            position: fixed;
+            z-index: 2;
+
+            top: -80px;
+
+            pointer-events: none;
+            user-select: none;
+
+            animation-name: caer;
+            animation-timing-function: linear;
+            animation-fill-mode: forwards;
+        }
+
+        @keyframes caer {
+            0% {
+                transform:
+                    translate3d(0, -90px, 0)
+                    rotate(0deg);
+
+                opacity: 0;
+            }
+
+            10% {
+                opacity: 1;
+            }
+
+            50% {
+                transform:
+                    translate3d(var(--movimiento), 55vh, 0)
+                    rotate(360deg);
+            }
+
+            100% {
+                transform:
+                    translate3d(0, 115vh, 0)
+                    rotate(720deg);
+
+                opacity: 0;
+            }
+        }
+
+        /* ==============================
+           DISEÑO PARA CELULARES
+        ============================== */
+
+        @media (max-width: 600px) {
+            .container {
+                width: 100%;
+                padding: 22px 14px 100px;
+            }
+
+            .encabezado {
+                padding: 10px 2px;
+            }
+
+            h1 {
+                font-size: clamp(1.85rem, 9vw, 2.55rem);
+            }
+
+            .subtitulo {
+                padding: 0 6px;
+            }
+
+            .zona-sobre {
+                margin-top: 25px;
+            }
+
+            .boton-sobre {
+                width: 180px;
+                height: 125px;
+            }
+
+            .sello {
+                top: 54px;
+                width: 43px;
+                height: 43px;
+            }
+
+            .boton-sobre.abierto .papel {
+                transform: translateX(-50%) translateY(-70px);
+            }
+
+            .carta {
+                margin-top: 65px;
+                padding: 22px 18px;
+                border-radius: 20px;
+            }
+
+            #textoCarta {
+                font-size: 1rem;
+                line-height: 1.8;
+            }
+
+            .flotante {
+                /* Reduce un poco los elementos en móviles */
+                max-font-size: 32px;
+            }
+        }
+
+        /* Reduce animaciones si el dispositivo lo solicita */
+        @media (prefers-reduced-motion: reduce) {
+            html {
+                scroll-behavior: auto;
+            }
+
+            h1,
+            .sobre,
+            .sorpresa {
+                animation: none;
+            }
+
+            .flotante {
+                display: none;
+            }
+        }
+    </style>
 </head>
 
 <body>
 
-<div class="container">
+    <main class="container">
 
-    <h1>🎂 Feliz Cumpleaños Caroline Romero ❤️</h1>
+        <header class="encabezado">
+            <h1>🎂 Feliz Cumpleaños Caroline Romero ❤️</h1>
 
-    <p class="subtitulo">
-        Hoy celebramos a una persona hermosa, especial y única.
-    </p>
+            <p class="subtitulo">
+                Hoy celebramos a una persona hermosa, especial y única.
+            </p>
+        </header>
 
-    <button id="btnCarta">
-        💌 Abrir Carta Especial
-    </button>
+        <!-- SOBRE ANIMADO -->
+        <section class="zona-sobre">
 
-    <div id="carta" class="carta">
+            <button
+                id="btnSobre"
+                class="boton-sobre"
+                type="button"
+                aria-label="Abrir carta especial"
+                aria-expanded="false"
+            >
+                <span class="sobre">
 
-        <p id="textoCarta"></p>
+                    <span class="sobre-fondo"></span>
 
-        <div class="mensaje-final">
-            🎂❤️ ¡Feliz Cumpleaños Amiga! ❤️🎂
-        </div>
+                    <span class="papel">
+                        Para Caroline Romero
+                        <br>
+                        con mucho cariño 🌻
+                    </span>
 
-        <div id="sorpresa">
-            🌻 Eres una persona muy especial, Caroline 🌻
-        </div>
+                    <span class="solapa-superior"></span>
 
-        <div class="firma">
-            🌻 Con mucho cariño para una amiga increíble 🌻
-            <br><br>
-            Carlos 💛
-        </div>
+                    <span class="sobre-frontal">
+                        <span class="sobre-frontal-centro"></span>
+                    </span>
 
-    </div>
+                    <span class="sello">♥</span>
 
-</div>
+                </span>
+            </button>
 
-<script>
+            <p id="textoBoton" class="texto-boton">
+                Toca el sobre para descubrir tu carta 💌
+            </p>
 
-const carta = document.getElementById("carta");
-const btnCarta = document.getElementById("btnCarta");
-const textoCarta = document.getElementById("textoCarta");
-const sorpresa = document.getElementById("sorpresa");
+        </section>
 
-const mensaje = `Querida Caroline Romero,
+        <!-- CARTA -->
+        <section
+            id="carta"
+            class="carta"
+            aria-live="polite"
+        >
+            <p id="textoCarta"></p>
+
+            <div id="finalCarta" class="final-carta">
+
+                <div class="mensaje-final">
+                    🎂❤️ ¡Feliz Cumpleaños Amiga! ❤️🎂
+                </div>
+
+                <div class="sorpresa">
+                    🌻 Eres una persona muy especial, Caroline 🌻
+                </div>
+
+                <div class="firma">
+                    🌻 Creada con cariño y admiración 🌻
+                    <br><br>
+                    Carlos 💛
+                </div>
+
+                <button
+                    id="btnCerrar"
+                    class="btn-cerrar"
+                    type="button"
+                >
+                    💌 Guardar la carta
+                </button>
+
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        /* ==============================
+           ELEMENTOS PRINCIPALES
+        ============================== */
+
+        const btnSobre = document.getElementById("btnSobre");
+        const btnCerrar = document.getElementById("btnCerrar");
+
+        const carta = document.getElementById("carta");
+        const textoCarta = document.getElementById("textoCarta");
+        const textoBoton = document.getElementById("textoBoton");
+        const finalCarta = document.getElementById("finalCarta");
+
+        /* ==============================
+           MENSAJE DE CUMPLEAÑOS
+        ============================== */
+
+        const mensaje = `Querida Caroline Romero,
 
 Hoy es un día muy especial porque celebramos que cumples un año más de vida.
 
@@ -239,101 +807,226 @@ Gracias por existir y por ser una persona tan maravillosa.
 
 Espero que este día esté lleno de sonrisas, abrazos sinceros y momentos que recuerdes para siempre.
 
-✨ Feliz Cumpleaños Caroline ✨`;
+✨ Feliz Cumpleaños, Caroline ✨`;
 
-btnCarta.addEventListener("click", ()=>{
+        let temporizadorEscritura = null;
+        let cartaAbierta = false;
+        let indiceTexto = 0;
 
-    if(carta.style.display === "block"){
+        /* ==============================
+           ABRIR EL SOBRE
+        ============================== */
 
-        carta.style.display = "none";
-        btnCarta.innerHTML = "💌 Abrir Carta Especial";
-        textoCarta.innerHTML = "";
-        sorpresa.style.display = "none";
-        return;
-    }
+        btnSobre.addEventListener("click", function () {
+            if (cartaAbierta) {
+                cerrarCarta();
+            } else {
+                abrirCarta();
+            }
+        });
 
-    carta.style.display = "block";
-    btnCarta.innerHTML = "❤️ Carta Abierta";
+        btnCerrar.addEventListener("click", cerrarCarta);
 
-    textoCarta.innerHTML = "";
-    sorpresa.style.display = "none";
+        function abrirCarta() {
+            cartaAbierta = true;
 
-    let i = 0;
+            btnSobre.classList.add("abierto");
+            btnSobre.setAttribute("aria-expanded", "true");
+            btnSobre.setAttribute("aria-label", "Cerrar carta especial");
 
-    function escribir(){
+            textoBoton.textContent = "El sobre está abierto ❤️";
 
-        if(i < mensaje.length){
+            finalCarta.classList.remove("visible");
+            carta.classList.remove("visible");
 
-            textoCarta.innerHTML =
-            mensaje.substring(0,i+1) +
-            '<span class="cursor">|</span>';
+            textoCarta.textContent = "";
+            indiceTexto = 0;
 
-            i++;
+            /* Espera a que el sobre termine de abrirse */
+            window.setTimeout(function () {
+                if (!cartaAbierta) {
+                    return;
+                }
 
-            window.scrollTo({
-                top:document.body.scrollHeight,
-                behavior:"smooth"
-            });
+                carta.classList.add("visible");
 
-            setTimeout(escribir,30);
+                carta.scrollIntoView({
+                    behavior: "smooth",
+                    block: "start"
+                });
 
-        }else{
-
-            textoCarta.innerHTML = mensaje;
-
-            sorpresa.style.display = "block";
-
-            window.scrollTo({
-                top:document.body.scrollHeight,
-                behavior:"smooth"
-            });
-
+                window.setTimeout(escribirMensaje, 500);
+            }, 850);
         }
 
-    }
+        /* ==============================
+           CERRAR EL SOBRE
+        ============================== */
 
-    escribir();
+        function cerrarCarta() {
+            cartaAbierta = false;
 
-});
+            window.clearTimeout(temporizadorEscritura);
 
-function crearGirasol(){
+            btnSobre.classList.remove("abierto");
+            btnSobre.setAttribute("aria-expanded", "false");
+            btnSobre.setAttribute("aria-label", "Abrir carta especial");
 
-    const elementos = [
-        "🌻",
-        "🌻",
-        "🌻",
-        "💛",
-        "🌼",
-        "❤️",
-        "✨"
-    ];
+            textoBoton.textContent =
+                "Toca el sobre para descubrir tu carta 💌";
 
-    const item = document.createElement("div");
+            carta.classList.remove("visible");
+            finalCarta.classList.remove("visible");
 
-    item.classList.add("flotante");
+            textoCarta.textContent = "";
+            indiceTexto = 0;
 
-    item.innerHTML =
-    elementos[Math.floor(Math.random()*elementos.length)];
+            btnSobre.scrollIntoView({
+                behavior: "smooth",
+                block: "center"
+            });
+        }
 
-    item.style.left =
-    Math.random()*100 + "vw";
+        /* ==============================
+           EFECTO DE MÁQUINA DE ESCRIBIR
+        ============================== */
 
-    item.style.fontSize =
-    (20 + Math.random()*25) + "px";
+        function escribirMensaje() {
+            if (!cartaAbierta) {
+                return;
+            }
 
-    item.style.animationDuration =
-    (6 + Math.random()*6) + "s";
+            if (indiceTexto < mensaje.length) {
+                /*
+                  textContent evita problemas con caracteres
+                  especiales y mantiene el código seguro.
+                */
+                textoCarta.textContent =
+                    mensaje.slice(0, indiceTexto + 1);
 
-    document.body.appendChild(item);
+                const cursor = document.createElement("span");
+                cursor.className = "cursor";
+                cursor.textContent = "|";
 
-    setTimeout(()=>{
-        item.remove();
-    },12000);
-}
+                textoCarta.appendChild(cursor);
 
-setInterval(crearGirasol,200);
+                indiceTexto++;
 
-</script>
+                /*
+                  Desplaza la pantalla cada cierto número de
+                  caracteres para que sea suave en celulares.
+                */
+                if (indiceTexto % 35 === 0) {
+                    desplazarMientrasEscribe();
+                }
+
+                temporizadorEscritura =
+                    window.setTimeout(escribirMensaje, 28);
+            } else {
+                terminarCarta();
+            }
+        }
+
+        function desplazarMientrasEscribe() {
+            const posicionFinal =
+                textoCarta.getBoundingClientRect().bottom;
+
+            const limiteVisible =
+                window.innerHeight * 0.82;
+
+            if (posicionFinal > limiteVisible) {
+                window.scrollBy({
+                    top: posicionFinal - limiteVisible + 35,
+                    behavior: "smooth"
+                });
+            }
+        }
+
+        function terminarCarta() {
+            textoCarta.textContent = mensaje;
+            finalCarta.classList.add("visible");
+
+            window.setTimeout(function () {
+                finalCarta.scrollIntoView({
+                    behavior: "smooth",
+                    block: "center"
+                });
+            }, 350);
+        }
+
+        /* ==============================
+           LLUVIA DE GIRASOLES
+        ============================== */
+
+        const elementosFlotantes = [
+            "🌻",
+            "🌻",
+            "🌻",
+            "🌻",
+            "🌻",
+            "💛",
+            "✨",
+            "🌼",
+            "❤️"
+        ];
+
+        function crearGirasol() {
+            /*
+              Limita la cantidad de elementos para mejorar
+              el rendimiento en celulares.
+            */
+            const cantidadActual =
+                document.querySelectorAll(".flotante").length;
+
+            if (cantidadActual >= 28) {
+                return;
+            }
+
+            const item = document.createElement("span");
+            item.className = "flotante";
+
+            item.textContent =
+                elementosFlotantes[
+                    Math.floor(
+                        Math.random() *
+                        elementosFlotantes.length
+                    )
+                ];
+
+            item.style.left =
+                Math.random() * 96 + "vw";
+
+            item.style.fontSize =
+                20 + Math.random() * 22 + "px";
+
+            item.style.animationDuration =
+                7 + Math.random() * 6 + "s";
+
+            item.style.animationDelay =
+                Math.random() * 0.7 + "s";
+
+            item.style.setProperty(
+                "--movimiento",
+                -45 + Math.random() * 90 + "px"
+            );
+
+            document.body.appendChild(item);
+
+            window.setTimeout(function () {
+                item.remove();
+            }, 14000);
+        }
+
+        window.setInterval(crearGirasol, 260);
+
+        /* Crea algunos girasoles al cargar */
+        for (let i = 0; i < 8; i++) {
+            window.setTimeout(
+                crearGirasol,
+                i * 160
+            );
+        }
+    </script>
 
 </body>
 </html>
