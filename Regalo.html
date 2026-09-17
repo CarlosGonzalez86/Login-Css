@@ -14,18 +14,20 @@
 }
 
 body{
-    font-family: 'Segoe UI', sans-serif;
-    background: linear-gradient(135deg,#1a0010,#3d0c2e,#5c1744);
+    font-family:'Segoe UI',sans-serif;
+    background:linear-gradient(135deg,#1a0010,#3d0c2e,#5c1744);
     min-height:100vh;
-    overflow-x:hidden;
+    overflow:hidden;
     color:white;
 }
 
 .container{
     max-width:900px;
-    margin:50px auto;
+    margin:30px auto;
     padding:30px;
     text-align:center;
+    position:relative;
+    z-index:10;
 }
 
 h1{
@@ -36,7 +38,9 @@ h1{
 }
 
 @keyframes latido{
-    50%{transform:scale(1.04);}
+    50%{
+        transform:scale(1.05);
+    }
 }
 
 .subtitulo{
@@ -50,15 +54,15 @@ h1{
 }
 
 button{
-    padding:15px 25px;
-    margin:10px;
+    padding:15px 30px;
     border:none;
     border-radius:50px;
-    cursor:pointer;
     background:#ff4f87;
     color:white;
+    cursor:pointer;
     font-size:1rem;
-    transition:.3s;
+    box-shadow:0 5px 15px rgba(0,0,0,.2);
+    transition:0.3s;
 }
 
 button:hover{
@@ -68,12 +72,13 @@ button:hover{
 .carta{
     display:none;
     margin-top:30px;
-    background:rgba(255,255,255,.1);
-    backdrop-filter:blur(10px);
     padding:30px;
-    border-radius:20px;
+    background:rgba(255,255,255,0.10);
+    backdrop-filter:blur(12px);
+    border-radius:25px;
     line-height:1.9;
     animation:aparecer 1s ease;
+    box-shadow:0 0 25px rgba(255,255,255,.1);
 }
 
 @keyframes aparecer{
@@ -87,9 +92,16 @@ button:hover{
     }
 }
 
+.mensaje-final{
+    margin-top:25px;
+    font-size:1.5rem;
+    color:#ffd6e7;
+    font-weight:bold;
+}
+
 .firma{
     margin-top:25px;
-    color:#ffd6e7;
+    color:#ffeaf2;
     font-style:italic;
     font-size:1.1rem;
 }
@@ -97,26 +109,40 @@ button:hover{
 .flotante{
     position:fixed;
     pointer-events:none;
-    animation:subir linear forwards;
+    top:-100px;
     z-index:1;
+    animation:caer linear forwards;
 }
 
-@keyframes subir{
-    from{
-        transform:translateY(100vh);
+@keyframes caer{
+
+    0%{
+        transform:
+        translateY(-100px)
+        rotate(0deg);
         opacity:1;
     }
-    to{
-        transform:translateY(-120px);
+
+    100%{
+        transform:
+        translateY(120vh)
+        rotate(720deg);
         opacity:0;
     }
+
 }
 
-.mensaje-final{
-    margin-top:25px;
-    font-size:1.4rem;
-    color:#ffd6e7;
-    font-weight:bold;
+@media(max-width:768px){
+
+    h1{
+        font-size:2rem;
+    }
+
+    .carta{
+        font-size:0.95rem;
+        padding:20px;
+    }
+
 }
 
 </style>
@@ -129,13 +155,15 @@ button:hover{
     <h1>🎂 Feliz Cumpleaños Caroline Romero ❤️</h1>
 
     <p class="subtitulo">
-        Hoy celebramos el cumpleaños de persona hermosa, especial y única.
+        Hoy celebramos a una persona hermosa, especial y única.
     </p>
 
     <div class="botones">
+
         <button id="btnCarta">
             💌 Abrir Carta Especial
         </button>
+
     </div>
 
     <div id="carta" class="carta">
@@ -144,7 +172,7 @@ button:hover{
 
         Querida Caroline Romero,
 
-        Hoy es un día muy especial, porque celebramos que cumples un año más de vida.
+        Hoy es un día muy especial porque celebramos que cumples un año más de vida.
 
         Quiero desearte un cumpleaños lleno de felicidad, salud, sueños cumplidos y momentos inolvidables.
 
@@ -164,6 +192,8 @@ button:hover{
 
         Gracias por existir y por ser una persona tan maravillosa.
 
+        Espero que este día esté lleno de sonrisas, abrazos sinceros y momentos que recuerdes para siempre.
+
         </p>
 
         <div class="mensaje-final">
@@ -171,18 +201,18 @@ button:hover{
         </div>
 
         <div class="firma">
-          🌻 Creada Con cariño y admiración de Carlos 
+            🌻 Con mucho cariño para una amiga increíble 🌻
+            <br><br>
+            Carlos 💛
         </div>
 
     </div>
 
 </div>
 
-<audio id="musica" loop>
-    musica.mp3
-</audio>
-
 <script>
+
+// CARTA
 
 const carta = document.getElementById("carta");
 const btnCarta = document.getElementById("btnCarta");
@@ -190,51 +220,61 @@ const btnCarta = document.getElementById("btnCarta");
 btnCarta.addEventListener("click", () => {
 
     if(carta.style.display === "block"){
+
         carta.style.display = "none";
         btnCarta.innerHTML = "💌 Abrir Carta Especial";
+
     }else{
+
         carta.style.display = "block";
         btnCarta.innerHTML = "❤️ Carta Abierta";
+
     }
 
 });
 
-const musica = document.getElementById("musica");
-const btnMusica = document.getElementById("btnMusica");
+// GIRASOLES
 
-btnMusica.addEventListener("click", () => {
+function crearGirasol(){
 
-    if(musica.paused){
-        musica.play();
-        btnMusica.innerHTML = "⏸️ Pausar Música";
-    }else{
-        musica.pause();
-        btnMusica.innerHTML = "🎵 Reproducir Música";
-    }
+    const elementos = [
+        "🌻",
+        "🌻",
+        "🌻",
+        "🌻",
+        "💛",
+        "❤️",
+        "✨",
+        "🌼"
+    ];
 
-});
+    const girasol = document.createElement("div");
 
-function crearElemento(){
+    girasol.classList.add("flotante");
 
-    const iconos = ["❤️","🎂","🎉","🌹","✨","💖"];
+    girasol.innerHTML =
+        elementos[Math.floor(Math.random()*elementos.length)];
 
-    const el = document.createElement("div");
+    girasol.style.left =
+        Math.random()*100 + "vw";
 
-    el.className = "flotante";
-    el.innerHTML = iconos[Math.floor(Math.random()*iconos.length)];
+    girasol.style.fontSize =
+        (25 + Math.random()*25) + "px";
 
-    el.style.left = Math.random()*100 + "vw";
-    el.style.fontSize = (20 + Math.random()*25) + "px";
-    el.style.animationDuration = (5 + Math.random()*5) + "s";
+    girasol.style.animationDuration =
+        (6 + Math.random()*6) + "s";
 
-    document.body.appendChild(el);
+    girasol.style.opacity =
+        0.7 + Math.random()*0.3;
 
-    setTimeout(()=>{
-        el.remove();
-    },10000);
+    document.body.appendChild(girasol);
+
+    setTimeout(() => {
+        girasol.remove();
+    },12000);
 }
 
-setInterval(crearElemento,300);
+setInterval(crearGirasol,180);
 
 </script>
 
