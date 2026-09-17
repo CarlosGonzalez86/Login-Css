@@ -45,7 +45,28 @@ h1{
     font-size:1.2rem;
 }
 
+.botones{
+    margin-top:30px;
+}
+
+button{
+    padding:15px 25px;
+    margin:10px;
+    border:none;
+    border-radius:50px;
+    cursor:pointer;
+    background:#ff4f87;
+    color:white;
+    font-size:1rem;
+    transition:.3s;
+}
+
+button:hover{
+    transform:scale(1.08);
+}
+
 .carta{
+    display:none;
     margin-top:30px;
     background:rgba(255,255,255,.1);
     backdrop-filter:blur(10px);
@@ -111,7 +132,13 @@ h1{
         Hoy celebramos a una persona hermosa, especial y única.
     </p>
 
-    <div class="carta">
+    <div class="botones">
+        <button id="btnCarta">
+            💌 Abrir Carta Especial
+        </button>
+    </div>
+
+    <div id="carta" class="carta">
 
         <p>
 
@@ -151,11 +178,38 @@ h1{
 
 </div>
 
-<audio id="musica" autoplay loop>
+<audio id="musica" loop preload="auto">
     <source src="assets/piano-suave.mp3" type="audio/mpeg">
+    Tu navegador no soporta audio HTML5.
 </audio>
 
 <script>
+
+const carta = document.getElementById("carta");
+const btnCarta = document.getElementById("btnCarta");
+
+btnCarta.addEventListener("click", () => {
+    if(carta.style.display === "block"){
+        carta.style.display = "none";
+        btnCarta.innerHTML = "💌 Abrir Carta Especial";
+    }else{
+        carta.style.display = "block";
+        btnCarta.innerHTML = "❤️ Carta Abierta";
+    }
+});
+
+const musica = document.getElementById("musica");
+const btnMusica = document.getElementById("btnMusica");
+
+btnMusica.addEventListener("click", () => {
+    if(musica.paused){
+        musica.play();
+        btnMusica.innerHTML = "⏸️ Pausar Música";
+    }else{
+        musica.pause();
+        btnMusica.innerHTML = "🎵 Reproducir Música";
+    }
+});
 
 function crearElemento(){
     const iconos = ["❤️","🎂","🎉","🌹","✨","💖"];
