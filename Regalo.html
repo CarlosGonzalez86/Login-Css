@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Feliz Cumpleaños Caroline Romero ❤️</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    background:linear-gradient(135deg,#090909,#24101a,#4b1230);
+    min-height:100vh;
+    font-family:Georgia, serif;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    overflow:hidden;
+    color:white;
+}
+
+.tarjeta{
+    width:90%;
+    max-width:900px;
+    padding:40px;
+    text-align:center;
+    background:rgba(255,255,255,0.08);
+    backdrop-filter:blur(12px);
+    border-radius:30px;
+    box-shadow:0 0 40px rgba(255,105,180,.25);
+    position:relative;
+    z-index:10;
+}
+
+h1{
+    font-size:3rem;
+    color:#ffd3df;
+    margin-bottom:10px;
+    animation:latido 1.8s infinite;
+}
+
+@keyframes latido{
+    50%{
+        transform:scale(1.03);
+    }
+}
+
+.subtitulo{
+    font-size:1.2rem;
+    color:#ffe7ef;
+    margin-bottom:25px;
+}
+
+button{
+    background:#ff4f87;
+    border:none;
+    color:white;
+    padding:15px 30px;
+    border-radius:35px;
+    cursor:pointer;
+    font-size:1rem;
+    margin:5px;
+    transition:.3s;
+}
+
+button:hover{
+    transform:scale(1.08);
+}
+
+.poema{
+    display:none;
+    margin-top:25px;
+    line-height:2;
+    font-size:1.15rem;
+    color:#fff3f7;
+    animation:aparecer 1.8s;
+}
+
+@keyframes aparecer{
+    from{
+        opacity:0;
+        transform:translateY(20px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+.firma{
+    margin-top:25px;
+    color:#ffd3df;
+    font-style:italic;
+    font-size:1.1rem;
+}
+
+.flotante{
+    position:absolute;
+    pointer-events:none;
+    animation:subir linear infinite;
+}
+
+@keyframes subir{
+    from{
+        transform:translateY(100vh);
+        opacity:1;
+    }
+    to{
+        transform:translateY(-100px);
+        opacity:0;
+    }
+}
+
+.mensaje-final{
+    font-size:1.5rem;
+    color:#ffd3df;
+    margin-top:25px;
+    font-weight:bold;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="tarjeta">
+
+<h1>🎂 Feliz Cumpleaños Caroline Romero ❤️</h1>
+
+<p class="subtitulo">
+Hoy celebra su cumpleaños una persona hermosa, especial y verdaderamente inolvidable.
+</p>
+
+<button onclick="mostrarCarta()">
+💌 Abrir Carta Especial
+</button>
+
+<button onclick="toggleMusica()">
+🎵 Música
+</button>
+
+<div class="poema" id="carta">
+
+<p>
+
+Querida Caroline Romero,
+
+Hoy es un día muy especial porque el mundo celebra el nacimiento de una persona maravillosa.
+
+Quiero desearte un cumpleaños lleno de sonrisas, felicidad, bendiciones y momentos que permanezcan para siempre en tu corazón.
+
+Existen personas que destacan por su belleza, pero también existen personas cuya esencia ilumina la vida de quienes las rodean. Tú tienes ambas cualidades.
+
+Tu sonrisa transmite alegría, tu forma de ser inspira tranquilidad y tu presencia tiene esa capacidad especial de hacer que todo parezca un poco más bonito.
+
+Y si hay algo que siempre llama la atención con una elegancia imposible de ignorar, es tu hermoso cabello negro.
+
+Tan brillante como una noche estrellada, tan elegante como la más fina obra de arte y tan único como tú.
+
+La forma en que la luz se refleja en él parece contar una historia de belleza y encanto que nadie podría pasar por alto.
+
+Pero lo más hermoso de ti no está solamente en lo que se ve.
+
+Está en tu bondad.
+
+Está en tu corazón.
+
+Está en tu esencia.
+
+Está en esa hermosa persona que eres cada día.
+
+Hoy deseo que cada sueño encuentre el camino para hacerse realidad.
+
+Que nunca te falten razones para sonreír.
+
+Que cada nuevo amanecer traiga esperanza.
+
+Y que la vida te sorprenda con cosas maravillosas porque te las mereces.
+
+Gracias por existir.
+
+Gracias por ser quien eres.
+
+Y gracias por hacer más bonito este mundo con tu presencia.
+
+✨ Feliz Cumpleaños, Caroline Romero. ✨
+
+Que este nuevo año de vida venga acompañado de mucha salud, éxito, amor y felicidad.
+
+</p>
+
+<div class="mensaje-final">
+🎂🌹❤️ ¡Feliz Cumpleaños Amiga! ❤️🌹🎂
+</div>
+
+<div class="firma">
+Con mucho cariño y admiración 💖
+</div>
+
+</div>
+
+</div>
+
+<audio id="musica" loop>
+    musica.mp3
+</audio>
+
+<script>
+
+const musica = document.getElementById("musica");
+
+function mostrarCarta(){
+    document.getElementById("carta").style.display="block";
+}
+
+function toggleMusica(){
+
+    if(musica.paused){
+        musica.play();
+    }else{
+        musica.pause();
+    }
+}
+
+document.addEventListener("click", function iniciar(){
+    musica.play().catch(()=>{});
+}, {once:true});
+
+function crearElemento(){
+
+    const emojis = [
+        "❤️",
+        "🎂",
+        "🎉",
+        "🌹",
+        "✨",
+        "💖"
+    ];
+
+    const elemento = document.createElement("div");
+
+    elemento.classList.add("flotante");
+    elemento.innerHTML =
+    emojis[Math.floor(Math.random()*emojis.length)];
+
+    elemento.style.left =
+    Math.random()*100 + "vw";
+
+    elemento.style.fontSize =
+    (18 + Math.random()*25) + "px";
+
+    elemento.style.animationDuration =
+    (5 + Math.random()*5) + "s";
+
+    document.body.appendChild(elemento);
+
+    setTimeout(()=>{
+        elemento.remove();
+    },10000);
+}
+
+setInterval(crearElemento,300);
+
+</script>
+
+</body>
+</html>
