@@ -1,647 +1,453 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Inspiración Bíblica Diaria</title>
-
-<style>
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: "Segoe UI", Arial, sans-serif;
-}
-
-:root {
-    --fondo-1: #071a35;
-    --fondo-2: #123e73;
-    --fondo-3: #2d75c7;
-    --texto: #ffffff;
-    --cristal: rgba(255, 255, 255, 0.12);
-    --borde: rgba(255, 255, 255, 0.22);
-    --dorado: #ffd76a;
-}
-
-body {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 25px;
-    background: linear-gradient(
-        135deg,
-        var(--fondo-1),
-        var(--fondo-2),
-        var(--fondo-3)
-    );
-    color: var(--texto);
-    overflow-x: hidden;
-    transition: background 0.5s, color 0.5s;
-}
-
-body::before,
-body::after {
-    content: "";
-    position: fixed;
-    border-radius: 50%;
-    pointer-events: none;
-    z-index: 0;
-}
-
-body::before {
-    width: 420px;
-    height: 420px;
-    top: -150px;
-    right: -130px;
-    background: rgba(255, 255, 255, 0.08);
-}
-
-body::after {
-    width: 320px;
-    height: 320px;
-    bottom: -120px;
-    left: -110px;
-    background: rgba(255, 215, 106, 0.08);
-}
-
-.contenedor {
-    position: relative;
-    z-index: 1;
-    width: 100%;
-    max-width: 850px;
-    padding: 42px;
-    text-align: center;
-    border-radius: 28px;
-    background: var(--cristal);
-    backdrop-filter: blur(18px);
-    -webkit-backdrop-filter: blur(18px);
-    border: 1px solid var(--borde);
-    box-shadow: 0 20px 55px rgba(0, 0, 0, 0.28);
-}
-
-.icono {
-    font-size: 65px;
-    margin-bottom: 12px;
-}
-
-h1 {
-    font-size: clamp(1.8rem, 5vw, 2.7rem);
-    margin-bottom: 10px;
-}
-
-.subtitulo {
-    opacity: 0.82;
-    margin-bottom: 25px;
-}
-
-.mensaje {
-    min-height: 145px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: clamp(1.2rem, 3.5vw, 1.55rem);
-    line-height: 1.7;
-    padding: 10px;
-}
-
-.cita {
-    margin-top: 15px;
-    color: var(--dorado);
-    font-size: 1.08rem;
-    font-weight: 700;
-}
-
-.botones {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 12px;
-    margin-top: 32px;
-}
-
-button {
-    border: none;
-    border-radius: 50px;
-    padding: 14px 22px;
-    cursor: pointer;
-    font-size: 0.97rem;
-    font-weight: 700;
-    transition: transform 0.25s, box-shadow 0.25s;
-}
-
-button:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.18);
-}
-
-button:active {
-    transform: translateY(0);
-}
-
-.btn-mensaje {
-    background: var(--dorado);
-    color: #172033;
-}
-
-.btn-whatsapp {
-    background: #25d366;
-    color: white;
-}
-
-.btn-instagram {
-    color: white;
-    background: linear-gradient(
-        45deg,
-        #feda75,
-        #fa7e1e,
-        #d62976,
-        #962fbf,
-        #4f5bd5
-    );
-}
-
-.btn-tema {
-    background: #64748b;
-    color: white;
-}
-
-.estado {
-    min-height: 24px;
-    margin-top: 22px;
-    font-size: 0.9rem;
-    opacity: 0.85;
-}
-
-footer {
-    position: relative;
-    z-index: 1;
-    margin-top: 25px;
-    text-align: center;
-    font-size: 0.95rem;
-    opacity: 0.85;
-}
-
-/* Tema claro */
-
-body.tema-claro {
-    --texto: #162033;
-    --cristal: rgba(255, 255, 255, 0.78);
-    --borde: rgba(255, 255, 255, 0.95);
-    --dorado: #175cc5;
-
-    background: linear-gradient(
-        135deg,
-        #f8fbff,
-        #ddeaff,
-        #b9d5fa
-    );
-}
-
-body.tema-claro .contenedor {
-    box-shadow: 0 20px 55px rgba(37, 80, 135, 0.2);
-}
-
-/* Animación */
-
-.fade {
-    animation: aparecer 0.7s ease;
-}
-
-@keyframes aparecer {
-    from {
-        opacity: 0;
-        transform: translateY(14px);
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#071a35">
+  <title>Inspiración Bíblica Diaria</title>
+  
+  <style>
+    /* Reset & CSS Variables */
+    * {
+      box-sizing: border-box;
+    }
+    
+    :root {
+      --t: #ffffff;
+      --s: #ffffffc7;
+      --g: #ffd76a;
+      --c: #ffffff1f;
+      --b: #ffffff40;
     }
 
-    to {
-        opacity: 1;
-        transform: translateY(0);
+    html, body {
+      margin: 0;
+      min-height: 100%;
     }
-}
 
-@media (max-width: 620px) {
     body {
-        padding: 18px;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 22px;
+      color: var(--t);
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: linear-gradient(135deg, #071a35, #123e73, #2d75c7);
+      transition: background 0.4s, color 0.4s;
     }
 
-    .contenedor {
-        padding: 30px 20px;
+    body.claro {
+      --t: #162033;
+      --s: #162033b8;
+      --g: #175cc5;
+      --c: #ffffffc7;
+      --b: #ffffff;
+      background: linear-gradient(135deg, #f8fbff, #ddeaff, #b9d5fa);
     }
 
+    /* Layout Principal */
+    main {
+      width: min(880px, 100%);
+      padding: 40px;
+      text-align: center;
+      border: 1px solid var(--b);
+      border-radius: 28px;
+      background: var(--c);
+      box-shadow: 0 22px 55px #0004;
+      backdrop-filter: blur(18px);
+    }
+
+    .icono {
+      font-size: 64px;
+    }
+
+    h1 {
+      margin: 8px 0;
+      font-size: clamp(1.8rem, 5vw, 2.7rem);
+    }
+
+    .sub {
+      color: var(--s);
+    }
+
+    #mensaje {
+      min-height: 175px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 18px;
+      font-size: clamp(1.2rem, 3.6vw, 1.6rem);
+      line-height: 1.7;
+    }
+
+    #cita {
+      color: var(--g);
+      font-weight: 800;
+      font-size: 1.1rem;
+    }
+
+    /* Botones */
     .botones {
-        flex-direction: column;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 11px;
+      margin-top: 30px;
     }
 
     button {
-        width: 100%;
+      border: 0;
+      border-radius: 99px;
+      padding: 14px 20px;
+      font-weight: 800;
+      font-size: 0.96rem;
+      cursor: pointer;
+      transition: transform 0.2s, background-color 0.2s;
     }
-}
-</style>
-</head>
 
+    button:hover {
+      transform: translateY(-3px);
+    }
+
+    .nuevo {
+      background: var(--g);
+      color: #172033;
+    }
+
+    .compartir {
+      background: #25d366;
+      color: #ffffff;
+    }
+
+    .instagram {
+      color: #ffffff;
+      background: linear-gradient(45deg, #fa7e1e, #d62976, #962fbf);
+    }
+
+    .tema {
+      background: #64748b;
+      color: #ffffff;
+    }
+
+    #estado {
+      min-height: 24px;
+      color: var(--s);
+      font-size: 0.9rem;
+      margin: 20px 0 0;
+    }
+
+    footer {
+      margin-top: 22px;
+      text-align: center;
+      opacity: 0.88;
+    }
+
+    /* Animación Fade */
+    .fade {
+      animation: fade 0.6s;
+    }
+
+    @keyframes fade {
+      from {
+        opacity: 0;
+        transform: translateY(12px);
+      }
+      to {
+        opacity: 1;
+        transform: none;
+      }
+    }
+
+    /* Adaptación Mobile */
+    @media (max-width: 620px) {
+      main {
+        padding: 28px 18px;
+      }
+      .botones {
+        flex-direction: column;
+      }
+      button {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
 <body>
 
-<main class="contenedor">
-
+  <main>
     <div class="icono">📖✨</div>
-
     <h1>Inspiración Bíblica Diaria</h1>
-
-    <p class="subtitulo">
-        Una palabra de fe, fortaleza y esperanza para tu día
-    </p>
-
-    <div id="mensaje" class="mensaje">
-        Dios tiene un propósito hermoso para tu vida.
-    </div>
-
-    <div id="cita" class="cita">
-        Jeremías 29:11
-    </div>
+    <p class="sub">Una palabra de fe, fortaleza y esperanza para tu día</p>
+    
+    <div id="mensaje" aria-live="polite"></div>
+    <div id="cita"></div>
 
     <div class="botones">
-
-        <button class="btn-mensaje" onclick="nuevoMensaje()">
-            📜 Nuevo mensaje
-        </button>
-
-        <button class="btn-whatsapp" onclick="compartirImagen('WhatsApp')">
-            📲 WhatsApp
-        </button>
-
-        <button class="btn-instagram" onclick="compartirImagen('Instagram')">
-            📸 Instagram
-        </button>
-
-        <button id="botonTema" class="btn-tema" onclick="cambiarTema()">
-            ☀️ Modo claro
-        </button>
-
+      <button class="nuevo" id="nuevo">📜 Nuevo mensaje</button>
+      <button class="compartir" id="compartir">📤 Compartir imagen</button>
+      <button class="instagram" id="instagram">📸 Descargar para Instagram</button>
+      <button class="tema" id="tema">☀️ Modo claro</button>
     </div>
 
-    <p id="estado" class="estado"></p>
+    <p id="estado" aria-live="polite"></p>
+  </main>
 
-</main>
-
-<footer>
+  <footer>
     <p>© Creado por Licdo. Carlos E. González</p>
-</footer>
+  </footer>
 
-<script>
-const mensajes = [
-    {
-        texto: "No temas los desafíos de hoy. Dios está contigo en cada paso que das y nunca te abandona.",
-        cita: "Isaías 41:10"
-    },
-    {
-        texto: "La alegría del Señor es tu fortaleza. Sonríe porque Dios sigue obrando a tu favor.",
-        cita: "Nehemías 8:10"
-    },
-    {
-        texto: "Aunque el camino parezca difícil, Dios abrirá puertas donde hoy ves obstáculos.",
-        cita: "Salmos 37:5"
-    },
-    {
-        texto: "Cada nuevo día es una oportunidad para comenzar de nuevo con esperanza.",
-        cita: "Lamentaciones 3:22-23"
-    },
-    {
-        texto: "Dios renueva tus fuerzas para que vueles como las águilas y no desmayes.",
-        cita: "Isaías 40:31"
-    },
-    {
-        texto: "La paz de Dios guardará tu corazón incluso en medio de las tormentas.",
-        cita: "Filipenses 4:7"
-    },
-    {
-        texto: "Todo lo puedo en Cristo que me fortalece.",
-        cita: "Filipenses 4:13"
-    },
-    {
-        texto: "Confía en el Señor con todo tu corazón y Él dirigirá tus caminos.",
-        cita: "Proverbios 3:5-6"
-    },
-    {
-        texto: "La esperanza en Dios ilumina incluso los días más oscuros.",
-        cita: "Romanos 15:13"
-    },
-    {
-        texto: "Todo obra para bien de quienes aman a Dios.",
-        cita: "Romanos 8:28"
+  <script>
+    // Base de datos de mensajes bíblicos
+    const mensajes = [
+      ["No tengas miedo ante los desafíos de hoy. Dios camina contigo y sostiene cada uno de tus pasos.", "Isaías 41:10"],
+      ["La alegría que viene de Dios puede convertirse en tu fuerza aun durante los días difíciles.", "Nehemías 8:10"],
+      ["Encomienda tu camino al Señor, confía en Él y sigue avanzando con esperanza.", "Salmos 37:5"],
+      ["Cada amanecer trae nuevas misericordias y una oportunidad para comenzar otra vez.", "Lamentaciones 3:22-23"],
+      ["Quienes esperan en Dios reciben nuevas fuerzas para continuar sin rendirse.", "Isaías 40:31"],
+      ["La paz de Dios puede guardar tu corazón aun cuando todo parezca incierto.", "Filipenses 4:7"],
+      ["Con Cristo puedes encontrar la fortaleza necesaria para enfrentar lo que venga.", "Filipenses 4:13"],
+      ["Confía de corazón en el Señor y permite que Él oriente tus decisiones.", "Proverbios 3:5-6"],
+      ["Dios puede llenarte de alegría, paz y esperanza cuando depositas tu confianza en Él.", "Romanos 15:13"],
+      ["Aun las circunstancias difíciles pueden ser transformadas para bien por Dios.", "Romanos 8:28"],
+      ["Dios es refugio, fuerza y ayuda cercana en los momentos de angustia.", "Salmos 46:1"],
+      ["Sé fuerte y valiente. Dios estará contigo adondequiera que vayas.", "Josué 1:9"],
+      ["Permanece en calma y confía: Dios puede luchar batallas que tú no puedes resolver solo.", "Éxodo 14:14"],
+      ["Dios se acerca al corazón herido y ayuda a sanar sus heridas.", "Salmos 147:3"],
+      ["Cuando atravieses aguas profundas, recuerda que Dios permanece a tu lado.", "Isaías 43:2"],
+      ["La oración hecha con fe tiene poder y puede traer transformación.", "Santiago 5:16"],
+      ["Vive el día de hoy con confianza y no permitas que el mañana robe tu paz.", "Mateo 6:34"],
+      ["Nada está fuera del alcance de Dios. Sigue creyendo incluso cuando no veas el camino.", "Lucas 1:37"],
+      ["La bondad y el amor de Dios pueden acompañarte todos los días de tu vida.", "Salmos 23:6"],
+      ["Ninguna circunstancia puede separarte del amor que Dios tiene por ti.", "Romanos 8:38-39"],
+      ["La fe te permite avanzar con certeza aun antes de ver la respuesta.", "Hebreos 11:1"],
+      ["Dios continuará la buena obra que comenzó en tu vida.", "Filipenses 1:6"],
+      ["Camina por fe, aunque tus ojos todavía no puedan ver todo el recorrido.", "2 Corintios 5:7"],
+      ["El Señor puede ser tu luz y tu seguridad. No permitas que el temor gobierne tu día.", "Salmos 27:1"],
+      ["Las pruebas pueden desarrollar perseverancia, carácter y una esperanza más firme.", "Romanos 5:3-4"],
+      ["Cuando estés cansado, acércate a Dios y encuentra descanso para tu alma.", "Mateo 11:28"],
+      ["Sigue creyendo. La fe abre el corazón a posibilidades que parecían imposibles.", "Marcos 9:23"],
+      ["Dios puede abrir un camino nuevo incluso en medio del desierto.", "Isaías 43:19"],
+      ["Puedes hacer planes, pero permite que Dios dirija y afirme tus pasos.", "Proverbios 16:9"],
+      ["Dios conoce tus lágrimas y comprende incluso las oraciones que no logras expresar.", "Salmos 56:8"],
+      ["El amor verdadero persevera, confía, espera y permanece firme.", "1 Corintios 13:7"],
+      ["Practica la gratitud en cada circunstancia y reconoce la presencia de Dios en tu camino.", "1 Tesalonicenses 5:18"],
+      ["Las lágrimas sembradas con fe pueden convertirse en una cosecha de alegría.", "Salmos 126:5"],
+      ["Mantente firme: Dios es fiel y cumple lo que promete.", "Números 23:19"],
+      ["La palabra de Dios puede iluminar tus pasos y orientarte por el camino correcto.", "Salmos 119:105"],
+      ["Dios puede hacer mucho más de lo que alcanzas a pedir o imaginar.", "Efesios 3:20"],
+      ["Entrega tus preocupaciones a Dios y permite que Él sostenga tu corazón.", "Salmos 55:22"],
+      ["Busca primero a Dios y permite que tus prioridades encuentren un nuevo orden.", "Mateo 6:33"],
+      ["Tus cargas no tienen que ser llevadas en soledad. Preséntalas a Dios en oración.", "1 Pedro 5:7"],
+      ["Haz el bien sin cansarte. A su debido tiempo podrás ver el fruto de tu perseverancia.", "Gálatas 6:9"],
+      ["Dios puede darte sabiduría cuando la pides con sinceridad y confianza.", "Santiago 1:5"],
+      ["En medio de la dificultad, recuerda que la presencia de Dios es mayor que tu temor.", "Salmos 23:4"],
+      ["Que la esperanza te mantenga alegre, la dificultad te haga perseverante y la oración te mantenga firme.", "Romanos 12:12"],
+      ["Dios puede darte un corazón firme, lleno de paz, cuando confías en Él.", "Isaías 26:3"],
+      ["Deja atrás lo que te detiene y avanza hacia lo que Dios ha puesto delante de ti.", "Filipenses 3:13-14"]
+    ];
+
+    // Selectores DOM
+    const $ = id => document.getElementById(id);
+    const m = $("mensaje");
+    const c = $("cita");
+    const e = $("estado");
+    const bt = $("tema");
+    let actual = -1;
+
+    // Generar nuevo mensaje
+    function nuevo() {
+      let i;
+      do {
+        i = Math.floor(Math.random() * mensajes.length);
+      } while (i === actual && mensajes.length > 1);
+      
+      actual = i;
+      m.classList.remove("fade");
+      c.classList.remove("fade");
+      
+      void m.offsetWidth; // Trigger reflow para reiniciar la animación
+      
+      m.textContent = mensajes[i][0];
+      c.textContent = mensajes[i][1];
+      m.classList.add("fade");
+      c.classList.add("fade");
+      e.textContent = "";
     }
-];
 
-let indiceActual = -1;
+    // Dividir texto en múltiples líneas para el Canvas
+    function lineas(ctx, texto, max) {
+      const palabras = texto.split(" ");
+      const resultado = [];
+      let lineaActual = "";
 
-function nuevoMensaje() {
-    let nuevoIndice;
-
-    do {
-        nuevoIndice = Math.floor(Math.random() * mensajes.length);
-    } while (
-        nuevoIndice === indiceActual &&
-        mensajes.length > 1
-    );
-
-    indiceActual = nuevoIndice;
-
-    const mensaje = document.getElementById("mensaje");
-    const cita = document.getElementById("cita");
-
-    mensaje.classList.remove("fade");
-    cita.classList.remove("fade");
-
-    void mensaje.offsetWidth;
-
-    mensaje.textContent = mensajes[indiceActual].texto;
-    cita.textContent = mensajes[indiceActual].cita;
-
-    mensaje.classList.add("fade");
-    cita.classList.add("fade");
-
-    mostrarEstado("");
-}
-
-function cambiarTema() {
-    document.body.classList.toggle("tema-claro");
-
-    const temaClaro =
-        document.body.classList.contains("tema-claro");
-
-    localStorage.setItem(
-        "temaBiblico",
-        temaClaro ? "claro" : "oscuro"
-    );
-
-    actualizarBotonTema();
-}
-
-function actualizarBotonTema() {
-    const boton = document.getElementById("botonTema");
-    const temaClaro =
-        document.body.classList.contains("tema-claro");
-
-    boton.textContent = temaClaro
-        ? "🌙 Modo oscuro"
-        : "☀️ Modo claro";
-}
-
-/*
- Esta función divide el texto en varias líneas
- para evitar que se salga de la imagen.
-*/
-function dibujarTextoAjustado(
-    contexto,
-    texto,
-    centroX,
-    inicioY,
-    anchoMaximo,
-    alturaLinea
-) {
-    const palabras = texto.split(" ");
-    const lineas = [];
-    let lineaActual = "";
-
-    palabras.forEach(palabra => {
-        const lineaPrueba =
-            lineaActual + palabra + " ";
-
-        const ancho =
-            contexto.measureText(lineaPrueba).width;
-
-        if (ancho > anchoMaximo && lineaActual !== "") {
-            lineas.push(lineaActual.trim());
-            lineaActual = palabra + " ";
+      for (const palabra of palabras) {
+        const testLinea = lineaActual ? lineaActual + " " + palabra : palabra;
+        if (ctx.measureText(testLinea).width > max && lineaActual) {
+          resultado.push(lineaActual);
+          lineaActual = palabra;
         } else {
-            lineaActual = lineaPrueba;
+          lineaActual = testLinea;
         }
-    });
+      }
 
-    lineas.push(lineaActual.trim());
+      if (lineaActual) resultado.push(lineaActual);
+      return resultado;
+    }
 
-    lineas.forEach((linea, indice) => {
-        contexto.fillText(
-            linea,
-            centroX,
-            inicioY + indice * alturaLinea
-        );
-    });
-
-    return inicioY + lineas.length * alturaLinea;
-}
-
-/*
- Crea una imagen PNG utilizando Canvas.
-*/
-function crearImagen() {
-    return new Promise((resolver, rechazar) => {
+    // Crear la imagen dinámicamente con Canvas (1080x1920 / 9:16)
+    function crearImagen() {
+      return new Promise((resolve, reject) => {
         const canvas = document.createElement("canvas");
-
-        // Formato vertical ideal para estados e historias.
         canvas.width = 1080;
-        canvas.height = 1350;
-
+        canvas.height = 1920;
+        
         const ctx = canvas.getContext("2d");
+        if (!ctx) return reject(new Error("Canvas no disponible"));
 
-        if (!ctx) {
-            rechazar(new Error("No se pudo crear la imagen."));
-            return;
-        }
-
-        const mensaje =
-            document.getElementById("mensaje").textContent;
-
-        const cita =
-            document.getElementById("cita").textContent;
-
-        const gradiente = ctx.createLinearGradient(
-            0,
-            0,
-            canvas.width,
-            canvas.height
-        );
-
+        // Fondo degradado
+        const gradiente = ctx.createLinearGradient(0, 0, 1080, 1920);
         gradiente.addColorStop(0, "#071a35");
-        gradiente.addColorStop(0.5, "#123e73");
+        gradiente.addColorStop(0.52, "#123e73");
         gradiente.addColorStop(1, "#2d75c7");
-
         ctx.fillStyle = gradiente;
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.fillRect(0, 0, 1080, 1920);
 
-        // Decoraciones de fondo
-        ctx.globalAlpha = 0.08;
-        ctx.fillStyle = "#ffffff";
-
+        // Contenedor translúcido
+        ctx.fillStyle = "#ffffff1c";
         ctx.beginPath();
-        ctx.arc(930, 140, 260, 0, Math.PI * 2);
+        ctx.roundRect(80, 105, 920, 1640, 48);
         ctx.fill();
-
-        ctx.beginPath();
-        ctx.arc(100, 1220, 230, 0, Math.PI * 2);
-        ctx.fill();
-
-        ctx.globalAlpha = 1;
-
-        // Tarjeta central
-        ctx.fillStyle = "rgba(255,255,255,0.11)";
-        ctx.strokeStyle = "rgba(255,255,255,0.30)";
+        ctx.strokeStyle = "#ffffff55";
         ctx.lineWidth = 3;
-
-        ctx.beginPath();
-        ctx.roundRect(90, 100, 900, 1130, 45);
-        ctx.fill();
         ctx.stroke();
 
+        // Encabezado
         ctx.textAlign = "center";
         ctx.textBaseline = "middle";
-
         ctx.fillStyle = "#ffd76a";
-        ctx.font = "bold 80px Arial";
-        ctx.fillText("✦", 540, 215);
+        ctx.font = "bold 92px Arial";
+        ctx.fillText("✦", 540, 245);
 
         ctx.fillStyle = "#ffffff";
-        ctx.font = "bold 55px Arial";
-        ctx.fillText(
-            "Inspiración Bíblica",
-            540,
-            320
-        );
+        ctx.font = "bold 58px Arial";
+        ctx.fillText("Inspiración Bíblica", 540, 365);
 
-        ctx.fillStyle = "rgba(255,255,255,0.78)";
-        ctx.font = "30px Arial";
-        ctx.fillText(
-            "Fortaleza, fe y esperanza para tu día",
-            540,
-            385
-        );
+        ctx.fillStyle = "#ffffffcc";
+        ctx.font = "31px Arial";
+        ctx.fillText("Fe, fortaleza y esperanza para tu día", 540, 430);
 
-        // Mensaje principal
+        // Mensaje Principal
         ctx.fillStyle = "#ffffff";
-        ctx.font = "bold 48px Arial";
+        ctx.font = "bold 49px Arial";
+        const arrayLineas = lineas(ctx, "“" + m.textContent.trim() + "”", 770);
+        const altoLinea = 76;
+        const yBase = 930 - ((arrayLineas.length - 1) * altoLinea) / 2;
 
-        const finalTexto = dibujarTextoAjustado(
-            ctx,
-            `“${mensaje}”`,
-            540,
-            570,
-            760,
-            72
-        );
+        arrayLineas.forEach((linea, index) => {
+          ctx.fillText(linea, 540, yBase + index * altoLinea);
+        });
 
-        // Cita
+        // Cita Bíblica
         ctx.fillStyle = "#ffd76a";
-        ctx.font = "bold 36px Arial";
-        ctx.fillText(cita, 540, finalTexto + 100);
+        ctx.font = "bold 38px Arial";
+        ctx.fillText(c.textContent.trim(), 540, 1360);
 
-        // Firma
-        ctx.fillStyle = "rgba(255,255,255,0.82)";
-        ctx.font = "27px Arial";
-        ctx.fillText(
-            "© Creado por Licdo. Carlos E. González",
-            540,
-            1150
-        );
+        // Separador
+        ctx.strokeStyle = "#ffffff48";
+        ctx.beginPath();
+        ctx.moveTo(260, 1510);
+        ctx.lineTo(820, 1510);
+        ctx.stroke();
 
+        // Firma / Crédito
+        ctx.fillStyle = "#ffffffdc";
+        ctx.font = "29px Arial";
+        ctx.fillText("© Creado por Licdo. Carlos E. González", 540, 1625);
+
+        // Exportación como PNG
         canvas.toBlob(blob => {
-            if (blob) {
-                resolver(blob);
-            } else {
-                rechazar(
-                    new Error("No se pudo generar la imagen.")
-                );
-            }
-        }, "image/png");
-    });
-}
+          if (blob) resolve(blob);
+          else reject(new Error("No se pudo generar la imagen PNG"));
+        }, "image/png", 1);
+      });
+    }
 
-/*
- Intenta compartir la imagen mediante el menú
- nativo del dispositivo. Si no es compatible,
- descarga la imagen.
-*/
-async function compartirImagen(aplicacion) {
-    mostrarEstado("⏳ Preparando imagen...");
+    // Convertir Blob a File
+    async function obtenerArchivo() {
+      const blob = await crearImagen();
+      return new File([blob], "inspiracion-biblica.png", { type: "image/png" });
+    }
 
-    try {
-        const blob = await crearImagen();
+    // Descargar imagen al dispositivo
+    function descargar(file) {
+      const url = URL.createObjectURL(file);
+      const enlace = document.createElement("a");
+      enlace.href = url;
+      enlace.download = file.name;
+      document.body.appendChild(enlace);
+      enlace.click();
+      enlace.remove();
+      setTimeout(() => URL.revokeObjectURL(url), 1500);
+    }
 
-        const archivo = new File(
-            [blob],
-            "inspiracion-biblica.png",
-            { type: "image/png" }
-        );
-
-        const datosCompartir = {
+    // Compartir mediante la API Nativa
+    async function compartir() {
+      e.textContent = "⏳ Preparando imagen...";
+      try {
+        const file = await obtenerArchivo();
+        if (navigator.share && navigator.canShare && navigator.canShare({ files: [file] })) {
+          await navigator.share({
             title: "Inspiración Bíblica Diaria",
-            text: `Mensaje de inspiración para compartir por ${aplicacion}.`,
-            files: [archivo]
-        };
-
-        if (
-            navigator.share &&
-            navigator.canShare &&
-            navigator.canShare({ files: [archivo] })
-        ) {
-            await navigator.share(datosCompartir);
-
-            mostrarEstado(
-                `✅ Imagen lista para compartir por ${aplicacion}.`
-            );
+            text: "Una palabra de fe y esperanza.",
+            files: [file]
+          });
+          e.textContent = "✅ Imagen enviada al menú para compartir.";
         } else {
-            descargarImagen(blob);
-
-            mostrarEstado(
-                "📥 La imagen fue descargada. Ahora puedes subirla a " +
-                aplicacion + "."
-            );
+          descargar(file);
+          e.textContent = "📥 Imagen descargada. Compártela desde tu galería.";
         }
-
-    } catch (error) {
-        if (error.name === "AbortError") {
-            mostrarEstado("Compartir cancelado.");
-        } else {
-            mostrarEstado(
-                "No se pudo compartir. Intenta descargar la imagen."
-            );
-
-            console.error(error);
-        }
-    }
-}
-
-function descargarImagen(blob) {
-    const enlace = document.createElement("a");
-    const urlTemporal = URL.createObjectURL(blob);
-
-    enlace.href = urlTemporal;
-    enlace.download = "inspiracion-biblica.png";
-
-    document.body.appendChild(enlace);
-    enlace.click();
-    enlace.remove();
-
-    URL.revokeObjectURL(urlTemporal);
-}
-
-function mostrarEstado(texto) {
-    document.getElementById("estado").textContent = texto;
-}
-
-window.addEventListener("DOMContentLoaded", () => {
-    const temaGuardado =
-        localStorage.getItem("temaBiblico");
-
-    if (temaGuardado === "claro") {
-        document.body.classList.add("tema-claro");
+      } catch (err) {
+        e.textContent = err.name === "AbortError" ? "Proceso cancelado." : "⚠️ No fue posible compartir.";
+      }
     }
 
-    actualizarBotonTema();
-    nuevoMensaje();
-});
-</script>
+    // Generar imagen optimizada para Historias de Instagram
+    async function instagram() {
+      e.textContent = "⏳ Preparando historia...";
+      try {
+        const file = await obtenerArchivo();
+        descargar(file);
+        e.textContent = "📸 Imagen 1080×1920 descargada. Súbela a tu historia desde la galería.";
+      } catch {
+        e.textContent = "⚠️ No fue posible crear la imagen.";
+      }
+    }
+
+    // Cambiar entre tema Claro/Oscuro
+    function cambiarTema() {
+      document.body.classList.toggle("claro");
+      const esClaro = document.body.classList.contains("claro");
+      localStorage.setItem("temaBiblico", esClaro ? "claro" : "oscuro");
+      bt.textContent = esClaro ? "🌙 Modo oscuro" : "☀️ Modo claro";
+    }
+
+    // Event Listeners e Inicialización
+    $("nuevo").onclick = nuevo;
+    $("compartir").onclick = compartir;
+    $("instagram").onclick = instagram;
+    bt.onclick = cambiarTema;
+
+    // Restaurar preferencia de tema guardada
+    if (localStorage.getItem("temaBiblico") === "claro") {
+      document.body.classList.add("claro");
+    }
+    bt.textContent = document.body.classList.contains("claro") ? "🌙 Modo oscuro" : "☀️ Modo claro";
+
+    // Cargar mensaje inicial
+    nuevo();
+  </script>
 
 </body>
 </html>
