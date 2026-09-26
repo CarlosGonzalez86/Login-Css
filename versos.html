@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Generador de Versos Románticos</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI',sans-serif;
+}
+
+body{
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:linear-gradient(135deg,#ff758c,#ff7eb3,#ffb199);
+    overflow:hidden;
+}
+
+.container{
+    width:90%;
+    max-width:700px;
+    background:rgba(255,255,255,.18);
+    backdrop-filter:blur(12px);
+    padding:30px;
+    border-radius:25px;
+    text-align:center;
+    color:white;
+    box-shadow:0 10px 35px rgba(0,0,0,.2);
+    z-index:10;
+}
+
+h1{
+    margin-bottom:15px;
+    font-size:2rem;
+}
+
+p.subtitulo{
+    margin-bottom:20px;
+    opacity:.9;
+}
+
+input{
+    width:100%;
+    padding:15px;
+    border:none;
+    border-radius:15px;
+    font-size:1rem;
+    outline:none;
+    margin-bottom:15px;
+}
+
+button{
+    padding:14px 24px;
+    border:none;
+    border-radius:50px;
+    cursor:pointer;
+    font-size:1rem;
+    margin:5px;
+    transition:.3s;
+}
+
+.btn-generar{
+    background:#ff2d75;
+    color:white;
+}
+
+.btn-generar:hover{
+    background:#e91e63;
+    transform:scale(1.05);
+}
+
+.btn-whatsapp{
+    background:#25D366;
+    color:white;
+}
+
+.btn-whatsapp:hover{
+    transform:scale(1.05);
+}
+
+#resultado{
+    margin-top:25px;
+    padding:20px;
+    background:rgba(255,255,255,.15);
+    border-radius:20px;
+    min-height:100px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:1.2rem;
+    line-height:1.8;
+    animation:aparecer .5s ease;
+}
+
+@keyframes aparecer{
+    from{
+        opacity:0;
+        transform:translateY(20px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+.corazon{
+    position:absolute;
+    color:rgba(255,255,255,.8);
+    animation:flotar linear infinite;
+}
+
+@keyframes flotar{
+    from{
+        transform:translateY(100vh);
+        opacity:1;
+    }
+    to{
+        transform:translateY(-120px);
+        opacity:0;
+    }
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+    <h1>❤️ Generador de Versos Románticos ❤️</h1>
+    <p class="subtitulo">
+        Escribe el nombre de esa persona especial
+    </p>
+
+    <input type="text" id="nombre" placeholder="Escribe el nombre aquí">
+
+    <button class="btn-generar" onclick="generarVerso()">
+        Generar Verso
+    </button>
+
+    <button class="btn-whatsapp" onclick="compartirWhatsApp()">
+        Compartir por WhatsApp
+    </button>
+
+    <div id="resultado">
+        Tu verso romántico aparecerá aquí 💖
+    </div>
+</div>
+
+<script>
+
+// Base de nombres femeninos comunes
+const nombresMujer = [
+"MARIA","ANA","SOFIA","ISABEL","ELENA","LUCIA","CAMILA",
+"VALERIA","PAULA","DANIELA","LAURA","CARLA","ANDREA",
+"JULIANA","MARTA","ADRIANA","NATALIA","ROSA","YESSICA",
+"KAREN","PATRICIA","ANGELA"
+];
+
+const versosMujer = [
+`{nombre}, eres la estrella que ilumina mis noches,
+la sonrisa que embellece mis días,
+y el sueño que jamás quisiera despertar. 💖`,
+
+`Desde que llegaste, {nombre},
+las flores parecen más hermosas
+y el amor tiene tu nombre escrito en cada latido. 🌹`,
+
+`{nombre}, si el cielo me diera un deseo,
+pediría una eternidad para mirarte,
+porque tus ojos son mi lugar favorito. ✨`,
+
+`Entre millones de personas encontré tu nombre, {nombre},
+y comprendí que el destino tenía preparado
+el regalo más hermoso para mi corazón. ❤️`
+];
+
+const versosHombre = [
+`{nombre}, tu presencia tiene la fuerza
+de mil amaneceres y la calma de un abrazo eterno.
+Cada día admiro más la persona que eres. ❤️`,
+
+`{nombre}, contigo descubrí que el amor
+no se busca, simplemente aparece
+y transforma todo en algo maravilloso. ✨`,
+
+`Desde que llegaste, {nombre},
+mi corazón encontró un refugio seguro
+donde los sueños se vuelven realidad. 💖`,
+
+`{nombre}, eres la razón por la que sonrío,
+la inspiración de mis pensamientos
+y el dueño de mis versos más sinceros. 🌹`
+];
+
+let ultimoVerso = "";
+
+function esMujer(nombre){
+    return nombresMujer.includes(nombre.toUpperCase());
+}
+
+function generarVerso(){
+
+    const nombre = document.getElementById("nombre").value.trim();
+
+    if(nombre === ""){
+        alert("Por favor escribe un nombre.");
+        return;
+    }
+
+    let verso;
+
+    if(esMujer(nombre)){
+        verso = versosMujer[Math.floor(Math.random()*versosMujer.length)];
+    }else{
+        verso = versosHombre[Math.floor(Math.random()*versosHombre.length)];
+    }
+
+    verso = verso.replaceAll("{nombre}", nombre);
+
+    ultimoVerso = verso;
+
+    document.getElementById("resultado").innerHTML = verso;
+}
+
+function compartirWhatsApp(){
+
+    if(ultimoVerso === ""){
+        alert("Primero genera un verso romántico.");
+        return;
+    }
+
+    const texto = encodeURIComponent("💖 Verso romántico 💖\n\n" + ultimoVerso);
+
+    window.open(
+        `https://wa.me/?text=${texto}`,
+        "_blank"
+    );
+}
+
+// Corazones flotantes
+
+function crearCorazon(){
+
+    const corazon = document.createElement("div");
+
+    corazon.classList.add("corazon");
+    corazon.innerHTML = "❤";
+
+    corazon.style.left = Math.random() * 100 + "vw";
+    corazon.style.fontSize = (Math.random()*25+15) + "px";
+    corazon.style.animationDuration = (Math.random()*6+4)+"s";
+
+    document.body.appendChild(corazon);
+
+    setTimeout(()=>{
+        corazon.remove();
+    },10000);
+}
+
+setInterval(crearCorazon,500);
+
+</script>
+
+</body>
+</html>
